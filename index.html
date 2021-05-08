@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Welcome MrAlpha786!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="search">
+        <input id="search-field"type="text" placeholder="Search DuckDuckGo..."/>
+        <button id="clear-field" onclick="clearField()"><img src="asset/icons/close.svg" alt=""></button>
+        <button id="search-button" onclick="return search()"><img src="asset/icons/loupe.svg" alt="Go"></button>
+      </div>
+    </div>
+
+    <script>
+      const searchField = document.getElementById("search-field");
+      const clearFieldButton = document.getElementById("clear-field");
+      const searchUrl = "https://duckduckgo.com/?q=";
+
+      searchField.addEventListener("keyup", function(event) {
+
+        if (searchField.value != "") {
+          clearFieldButton.style.visibility = "visible";
+        } else {
+          clearFieldButton.style.visibility = "hidden";
+        }
+
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("search-button").click();
+        }
+
+      });
+
+
+      function clearField() {
+        searchField.value = "";
+        clearFieldButton.style.visibility = "hidden";
+        searchField.focus()
+      }
+
+      // Search
+      function search() {
+        if (searchField.value != "") {
+          var val = searchField.value;
+          window.open(searchUrl + val);
+        }
+        clearField();
+      }
+    </script>
+  </body>
+</html>
