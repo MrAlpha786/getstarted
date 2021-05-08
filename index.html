@@ -5,53 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- GetStarted - A simple responsive Homepage
+        Author: MrAlpha786  (github.con/MrAlpha786) -->
+
     <title>Welcome MrAlpha786!</title>
+
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
+      <h1>Hi, <span id="author" onclick="toggleMode()">Faizan</span></h1>
+
       <div id="search">
-        <input id="search-field"type="text" placeholder="Search DuckDuckGo..."/>
-        <button id="clear-field" onclick="clearField()"><img src="asset/icons/close.svg" alt=""></button>
-        <button id="search-button" onclick="return search()"><img src="asset/icons/loupe.svg" alt="Go"></button>
+      <input id="search-field" type="text" placeholder="Search DuckDuckGo..."/>
+      <button id="clear-field" onclick="clearField()"><img src="asset/icons/close.svg" alt="clear"></button>
+      <button id="search-button" onclick="search()"><img src="asset/icons/loupe.svg" alt="Go"></button>
       </div>
+
+      <div class="table-container">
+        <div class="col-container" id="tab-container">
+      	  <div class="tab active" data-type="general-tab">General</div>
+      	  <div class="tab" data-type="tech-tab">Tech</div>
+      	  <div class="tab" data-type="fun-tab">Fun</div>
+      	  <div class="tab" data-type="social-tab">Social</div>
+      	</div>
+
+      	<div class="col-container" id="content-container">
+      	  <div class="content active" data-type="general-tab"></div>
+      	  <div class="content" data-type="tech-tab"></div>
+      	  <div class="content" data-type="fun-tab"></div>
+      	  <div class="content" data-type="social-tab"></div>
+      	</div>
+      </div>
+
     </div>
 
-    <script>
-      const searchField = document.getElementById("search-field");
-      const clearFieldButton = document.getElementById("clear-field");
-      const searchUrl = "https://duckduckgo.com/?q=";
+    <script src="script.js"></script>
 
-      searchField.addEventListener("keyup", function(event) {
-
-        if (searchField.value != "") {
-          clearFieldButton.style.visibility = "visible";
-        } else {
-          clearFieldButton.style.visibility = "hidden";
-        }
-
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          document.getElementById("search-button").click();
-        }
-
-      });
-
-
-      function clearField() {
-        searchField.value = "";
-        clearFieldButton.style.visibility = "hidden";
-        searchField.focus()
-      }
-
-      // Search
-      function search() {
-        if (searchField.value != "") {
-          var val = searchField.value;
-          window.open(searchUrl + val);
-        }
-        clearField();
-      }
-    </script>
   </body>
 </html>
