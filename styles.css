@@ -150,9 +150,10 @@ button#clear-field img {
 
 .content {
 	display: none;
+    max-height: 35vh;
 	background-color: var(--secondaryBg);
 	flex-direction: column;
-	overflow: hidden;
+	overflow: scroll;
 }
 
 .content.active {
