@@ -50,6 +50,7 @@ body {
 
 ::-webkit-scrollbar-track {
     background: #00000000;
+    margin-bottom: 0.75em;
 }
 
 ::-webkit-scrollbar-thumb {
