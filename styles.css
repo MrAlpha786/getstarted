@@ -12,6 +12,7 @@
   --secondaryBg: #f1f1f1;
   --invert: 0;
 
+  --scrollbar: #888;
   --red: #cc241d;
   --green: #98971a;
   --yellow: #d79921;
@@ -39,6 +40,22 @@ body {
 	border: 0;
 	outline-style: none;
 	font-family: var(--fontFamily);
+    scrollbar-color: var(--scrollbar) #00000000;
+}
+
+::-webkit-scrollbar {
+    width: 0.3em;
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: #00000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar);
+    border: 0;
+    border-radius: 1em;
 }
 
 .container {
@@ -154,12 +171,20 @@ button#clear-field img {
     max-height: 35vh;
 	background-color: var(--secondaryBg);
 	flex-direction: column;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .content.active {
 	width: 100%;
 	display: flex;
+}
+
+.content:hover {
+    scrollbar-width: 0.3em;
+}
+
+.content:hover::-webkit-scrollbar {
+    display: block;
 }
 
 .content > a {
