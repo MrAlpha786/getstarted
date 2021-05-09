@@ -143,6 +143,7 @@ button#clear-field img {
 
 /* Tab Content */
 #content-container {
+    align-items: flex-start;
 	background-color: var(--Bg);
 	border-radius: 0 0 0.75em 0.75em;
 }
