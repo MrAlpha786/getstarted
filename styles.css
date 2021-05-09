@@ -39,6 +39,7 @@ body {
 	text-decoration: none;
 	border: 0;
 	outline-style: none;
+    -webkit-tap-highlight-color: transparent;
 	font-family: var(--fontFamily);
     scrollbar-color: var(--scrollbar) #00000000;
 }
