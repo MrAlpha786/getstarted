@@ -56,7 +56,7 @@ var searchUrl = "https://duckduckgo.com/?q=";
 function search() {
     if (searchField.value != "") {
         var val = searchField.value;
-        window.open(searchUrl + val);
+        window.open(searchUrl + val, "_self");
     }
     clearField();
 }
