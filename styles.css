@@ -41,12 +41,13 @@ body {
 	outline-style: none;
     -webkit-tap-highlight-color: transparent;
 	font-family: var(--fontFamily);
-    scrollbar-color: var(--scrollbar) #00000000;
+    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: #00000000 #00000000;
 }
 
 ::-webkit-scrollbar {
     width: 0.3em;
-    display: none;
 }
 
 ::-webkit-scrollbar-track {
@@ -55,9 +56,25 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar);
+    background-color: #00000000;
     border: 0;
     border-radius: 1em;
+}
+
+:hover {
+    scrollbar-color: var(--scrollbar) #00000000;
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar);
+}
+
+.visible-scrollbar {
+	scrollbar-color: var(--scrollbar) #00000000;
+}
+
+.visible-scrollbar::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar);
 }
 
 .container {
@@ -179,14 +196,6 @@ button#clear-field img {
 .content.active {
 	width: 100%;
 	display: flex;
-}
-
-.content:hover {
-    scrollbar-width: 0.3em;
-}
-
-.content:hover::-webkit-scrollbar {
-    display: block;
 }
 
 .content > a {

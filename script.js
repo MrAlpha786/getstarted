@@ -1,6 +1,21 @@
 // GetStarted - A simple responsive Homepage
 // Author: MrAlpha786 (github.con/MrAlpha786)
 
+// Show Scrollbar on scrolling
+window.addEventListener('scroll', function showScrollbar(e) {
+    if (e.target.classList.contains("visible-scrollbar") === false) {
+        e.target.classList.add("visible-scrollbar");
+
+        // Hide Scrollbar after 1.5s
+        setTimeout(hideScrollbar, 1500, e);
+    }
+}, true);
+
+// Hide Scrollbar
+function hideScrollbar(e) {
+    e.target.classList.remove("visible-scrollbar");
+}
+
 // Check if dark-mode is enabled
 if(localStorage.getItem('darkMode') == 'enabled'){
     document.body.classList.toggle("dark-mode");
@@ -90,7 +105,7 @@ var links_var = [
         ['photos', 'aaa'],
         ['mega', 'aaa'],
     ],
-    [   // Teck
+    [   // Tech
         ['github', 'aaa'],
         ['freenode', 'aaa'],
         ['stackoverflow', 'aaa'],
