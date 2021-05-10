@@ -1,1 +1,1 @@
-# GetStarted - A Simple Responsive Homepage
+# GetStarted - A Simple Responsive Startpage

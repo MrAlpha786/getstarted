@@ -1,4 +1,4 @@
-// GetStarted - A simple responsive Homepage
+// GetStarted - A simple responsive Startpage
 // Author: MrAlpha786 (github.con/MrAlpha786)
 
 // Show Scrollbar on scrolling
