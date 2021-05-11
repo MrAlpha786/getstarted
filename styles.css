@@ -181,6 +181,7 @@ button#clear-field img {
 .content {
 	display: none;
     max-height: 35vh;
+    padding-bottom: 0.75em;
 	background-color: var(--secondaryBg);
 	flex-direction: column;
 	overflow: auto;
