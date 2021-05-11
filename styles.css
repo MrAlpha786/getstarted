@@ -57,24 +57,17 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: #00000000;
-    border: 0;
     border-radius: 1em;
 }
 
-:hover {
+:hover,
+.visible-scrollbar {
     scrollbar-color: var(--scrollbar) #00000000;
 }
 
-:hover::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar);
-}
-
-.visible-scrollbar {
-	scrollbar-color: var(--scrollbar) #00000000;
-}
-
+:hover::-webkit-scrollbar-thumb,
 .visible-scrollbar::-webkit-scrollbar-thumb {
-	background-color: var(--scrollbar);
+    background-color: var(--scrollbar);
 }
 
 .container {
@@ -88,7 +81,7 @@ body {
 	flex-direction: column;
 }
 
-/* Gteeting */
+/* Greeting */
 #author {
 	padding: 0 0.5em;
 	color: var(--bg);
