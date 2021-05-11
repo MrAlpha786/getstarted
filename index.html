@@ -14,10 +14,10 @@
   </head>
   <body>
     <div class="container">
-      <h1>Hi, <span id="author" onclick="toggleMode()">Faizan</span></h1>
+      <h1>Hi, <span id="username" onclick="toggleMode()"></span></h1>
 
       <div id="search">
-      <input id="search-field" type="text" placeholder="Search DuckDuckGo..."/>
+      <input id="search-field" type="text"/>
       <button id="clear-field" onclick="clearField()"><img src="asset/icons/close.svg" alt="clear"></button>
       <button id="search-button" onclick="search()"><img src="asset/icons/loupe.svg" alt="Go"></button>
       </div>
@@ -40,7 +40,8 @@
 
     </div>
 
-    <script src="script.js"></script>
+    <script src="config.js"></script>
+    <script src="main.js"></script>
 
   </body>
 </html>

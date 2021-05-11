@@ -82,7 +82,7 @@ body {
 }
 
 /* Greeting */
-#author {
+#username {
 	padding: 0 0.5em;
 	color: var(--bg);
 	background-color: var(--fg);
