@@ -201,23 +201,23 @@ button#clear-field img {
 }
 
 /* Colors */
-.tab.active[data-type*="general"],
-.content[data-type*="general"] a:hover {
+.tab.active[data-tab*="1"],
+.content[data-tab*="1"] a:hover {
 	background-color: var(--red);
 }
 
-.tab.active[data-type*="tech"],
-.content[data-type*="tech"] a:hover {
+.tab.active[data-tab*="2"],
+.content[data-tab*="2"] a:hover {
 	background-color: var(--green);
 }
 
-.tab.active[data-type*="fun"],
-.content[data-type*="fun"] a:hover {
+.tab.active[data-tab*="3"],
+.content[data-tab*="3"] a:hover {
 	background-color: var(--yellow);
 }
 
-.tab.active[data-type*="social"],
-.content[data-type*="social"] a:hover {
+.tab.active[data-tab*="4"],
+.content[data-tab*="4"] a:hover {
 	background-color: var(--blue);
 }
 
@@ -228,7 +228,7 @@ button#clear-field img {
 		background-color: transparent;
 	}
 
-	.tab, .tab.active[data-type$="tab"] {
+	.tab, .tab.active[data-tab^="tab"] {
 		width: 24%;
 		margin: 0 1%;
 		padding:0.5em;
@@ -237,19 +237,19 @@ button#clear-field img {
 		border-radius: 0.75rem 0.75rem 0 0;
 	}
 
-	.tab[data-type*="general"] {
+	.tab[data-tab*="1"] {
 		color: var(--red);
 	}
 
-	.tab[data-type*="tech"] {
+	.tab[data-tab*="2"] {
 		color: var(--green);
 	}
 
-	.tab[data-type*="fun"] {
+	.tab[data-tab*="3"] {
 		color: var(--yellow);
 	}
 
-	.tab[data-type*="social"] {
+	.tab[data-tab*="4"] {
 		color: var(--blue);
 	}
 
