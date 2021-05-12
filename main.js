@@ -16,7 +16,7 @@ const clearFieldButton = document.getElementById("clear-field");
 
 
 if (!Object.keys(searchEngines).includes(searchEngine)) {
-	searchEngine = "Google"
+    searchEngine = "Google"
 }
 
 var searchUrl = searchEngines[searchEngine];
@@ -91,13 +91,26 @@ function toggleMode() {
     }
 }
 
-//Link Table
-
-//Set tab and corresponding content as active on mouseclick
-var tabs = document.querySelectorAll('.tab:not(#bottom-tabs .tab)');
+//Bookmark Table
+var tabs = document.querySelectorAll('.tab');
 var contents = document.querySelectorAll('.content');
 
 for (let i=0; i<tabs.length; i++){
+
+    tabs[i].innerHTML = cards[i].name;
+
+    var sites = Object.keys(cards[i].bookmarks);
+    //Populate content with bookmarks
+    for (let j=0; j<sites.length; j++){
+
+        var a_link = document.createElement('a');
+        a_link.innerHTML = sites[j];
+        a_link.href = cards[i].bookmarks[sites[j]];
+
+        contents[i].appendChild(a_link);
+    }
+
+    // Make tab active on mouse click
     tabs[i].addEventListener('mouseenter', function(){
         for (let j=0; j<tabs.length; j++){
             tabs[j].classList.remove('active');
@@ -112,35 +125,7 @@ for (let i=0; i<tabs.length; i++){
 }
 
 
-//Populate content with links and add event  listener
-var contents = document.querySelectorAll('.content');
-for (let i=0; i<contents.length; i++){
-    for (let j=0; j<links_var[i].length; j++){
 
-        var a_link = document.createElement('a');
-        a_link.setAttribute('data-id', 'i' + i + '_j' + j);
-        a_link.innerHTML = links_var[i][j][0];
-
-        if (typeof links_var[i][j][1] == 'string'){
-
-            a_link.href = links_var[i][j][1];
-            contents[i].appendChild(a_link);
-        }
-        else {
-
-            contents[i].appendChild(a_link);
-            for (let k=0; k<links_var[i][j][1].length; k++){
-                document.querySelector('a[data-id="i' + i + '_j' + j + '"]').setAttribute('data-link_' + k, links_var[i][j][1][k][1]);
-            }
-            document.querySelector('a[data-id="i' + i + '_j' + j + '"]').addEventListener('click', function(event){
-                for (let k=0; k<links_var[i][j][1].length; k++){
-                    event.preventDefault();
-                    window.open(document.querySelector('a[data-id="i' + i + '_j' + j + '"]').getAttribute('data-link_' + k));
-                }
-            })
-        }
-    }
-}
 
 
 
