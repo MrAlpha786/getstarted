@@ -1,47 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <!-- GetStarted - A simple responsive Startpage
-        Author: MrAlpha786  (github.con/MrAlpha786) -->
-
-    <title>GetStarted</title>
-
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Hi, <span id="username" onclick="toggleMode()"></span></h1>
-
-      <div id="search">
-      <input id="search-field" type="text"/>
-      <button id="clear-field" onclick="clearField()"><img src="asset/icons/close.svg" alt="clear"></button>
-      <button id="search-button" onclick="search()"><img src="asset/icons/loupe.svg" alt="Go"></button>
-      </div>
-
-      <div class="table-container">
-        <div class="col-container" id="tab-container">
-      	  <div class="tab active" data-tab="tab-1">General</div>
-      	  <div class="tab" data-tab="tab-2">Tech</div>
-      	  <div class="tab" data-tab="tab-3">Fun</div>
-      	  <div class="tab" data-tab="tab-4">Social</div>
-      	</div>
-
-      	<div class="col-container" id="content-container">
-      	  <div class="content active" data-tab="tab-1"></div>
-      	  <div class="content" data-tab="tab-2"></div>
-      	  <div class="content" data-tab="tab-3"></div>
-      	  <div class="content" data-tab="tab-4"></div>
-      	</div>
-      </div>
-
-    </div>
-
-    <script src="config.js"></script>
-    <script src="main.js"></script>
-
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="apple-mobile-web-app-title" content="GetStarted" />
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
 </html>

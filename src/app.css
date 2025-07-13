@@ -1,0 +1,74 @@
+/* GetStarted - A simple responsive Startpage
+ * Author: MrAlpha786 (github.con/MrAlpha786) */
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+	--color-base-100: #ffffff;
+	--color-base-content: #111111;
+	--color-base-200: #f1f1f1;
+	--color-tab1: #cc241d;
+	--color-tab2: #98971a;
+	--color-tab3: #d79921;
+	--color-tab4: #458488;
+	--font-roboto: 'Roboto', sans-serif;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('/fonts/Roboto.ttf') format('truetype');
+}
+
+:root,
+body,
+[data-theme] {
+	@apply bg-base-100 font-roboto text-base-content h-full text-base;
+}
+
+[data-theme='dark'] {
+	--color-base-100: #111;
+	--color-base-content: #fff;
+	--color-base-200: #282828;
+}
+
+@supports (scrollbar-width: auto) {
+	* {
+		scrollbar-color: #8888 transparent;
+		scrollbar-width: thin;
+	}
+}
+
+@supports selector(::-webkit-scrollbar) {
+	::-webkit-scrollbar-thumb {
+		background: transparent;
+		border-radius: 1rem;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	:hover::-webkit-scrollbar-thumb {
+		background: #8888;
+	}
+	:hover::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar {
+		max-width: 0.3rem;
+	}
+}
+
+.tab {
+	@apply sm:bg-base-200 w-1/4 p-2 text-center max-sm:m-2 max-sm:cursor-pointer max-sm:rounded-lg sm:rounded-t-xl sm:pt-2 sm:text-xl;
+}
+
+.content {
+	@apply bg-base-200 max-h-72 w-full flex-col overflow-auto rounded-b-xl p-2 sm:flex;
+}
+
+.bookmark {
+	@apply block overflow-x-clip rounded-lg p-2 text-center text-ellipsis whitespace-nowrap hover:text-white;
+}
