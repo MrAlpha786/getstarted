@@ -62,7 +62,7 @@ body,
 }
 
 .tab {
-	@apply sm:bg-base-200 w-1/4 p-2 text-center max-sm:m-2 max-sm:cursor-pointer max-sm:rounded-lg sm:rounded-t-xl sm:pt-2 sm:text-xl;
+	@apply sm:bg-base-200 w-1/4 p-2 text-center max-sm:cursor-pointer max-sm:rounded-lg sm:rounded-t-xl sm:text-xl;
 }
 
 .content {

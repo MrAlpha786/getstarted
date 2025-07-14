@@ -13,7 +13,7 @@
 
 <div class="w-full" id="tab-container">
 	<!-- Tabs -->
-	<div class="bg-base-200 flex gap-4 overflow-hidden rounded-t-xl sm:bg-transparent">
+	<div class="bg-base-200 flex gap-4 overflow-hidden rounded-t-xl max-sm:p-2 sm:bg-transparent">
 		{#each cards as card, i}
 			<button
 				class={`tab ${tabText[i]} ${i === activeTab ? `max-sm:text-white ${tabBg[i]}` : ''}`}

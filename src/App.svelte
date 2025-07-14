@@ -2,13 +2,13 @@
 	import Tabs from './lib/components/Tabs.svelte';
 	import Search from './lib/components/Search.svelte';
 	import { supportedEngines } from './lib/constants/search-engines';
-	import { config } from './lib/stores/config-store';
-	import { toggleTheme } from './lib/stores/theme-store';
+	import { config } from './lib/utils/config';
+	import { toggleTheme } from './lib/utils/theme';
 	import type { SearchEngine } from './lib/types';
 
 	const allSearchEngines: Record<SearchEngine, string> = $derived({
 		...supportedEngines,
-		...($config.customEngines || {})
+		...(config.customEngines || {})
 	});
 </script>
 
@@ -27,13 +27,13 @@
 			<button
 				class="text-base-100 bg-base-content cursor-pointer rounded-full px-4"
 				onclick={toggleTheme}
-				aria-label="Theme Toggle">{$config.userName}</button
+				aria-label="Theme Toggle">{config.userName}</button
 			>
 		</h1>
 
-		<Search searchEngine={$config.searchEngine} {allSearchEngines} />
+		<Search searchEngine={config.searchEngine} {allSearchEngines} />
 
-		<Tabs cards={$config.cards} />
+		<Tabs cards={config.cards} />
 		<!-- <button id="openSettingsBtn" class="btn btn-outline">⚙️ Settings</button> -->
 	</div>
 </section>
