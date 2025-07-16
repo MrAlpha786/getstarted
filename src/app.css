@@ -14,6 +14,14 @@
 	src: url('./assets/fonts/Roboto.ttf') format('truetype');
 }
 
+@font-face {
+	font-family: 'Leckerli One';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('./assets/fonts/LeckerliOne.ttf') format('truetype');
+}
+
 :root {
 	--base-100: #ffffff;
 	--base-content: #111111;
@@ -23,6 +31,7 @@
 	--tab3: #d79921;
 	--tab4: #458488;
 	--roboto: 'Roboto', sans-serif;
+	--logo: 'Leckerli One';
 
 	--radius: 0.625rem;
 	--background: oklch(1 0 0);
@@ -147,6 +156,7 @@ body,
 	--color-tab3: var(--tab3);
 	--color-tab4: var(--tab4);
 	--font-roboto: var(--roboto);
+	--font-logo: var(--logo);
 }
 
 @layer base {
