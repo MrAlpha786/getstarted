@@ -1,7 +1,7 @@
 {
-	"name": "GetStarted",
+	"name": "GetStarted - Minimal & Fast",
 	"short_name": "GetStarted",
-	"description": "A fast, customizable offline startpage by MrAlpha786.",
+	"description": "Minimal & fast startpage for you browser.",
 	"start_url": "/",
 	"scope": "/",
 	"display": "standalone",

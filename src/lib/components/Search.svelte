@@ -13,12 +13,7 @@
 		window.open(searchEngine.url + encodeURIComponent(searchValue), '_self');
 	}
 
-	// This is a hack to get focus from browser searchbar
-	if (location.search !== '?x') {
-		location.search = '?x';
-		throw new Error(); // load everything on the next page;
-		// stop execution on this page
-	}
+	let q = "?"; if (location.search !== q && !location.href.includes(q)) location.search = q;
 </script>
 
 <div
