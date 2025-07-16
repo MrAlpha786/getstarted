@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Card } from '../types';
+	import type { Card } from '$lib/types/user-config';
 	const { cards }: { cards: Card[] } = $props();
 
 	let activeTab = $state(0);
@@ -14,7 +14,7 @@
 <div class="w-full" id="tab-container">
 	<!-- Tabs -->
 	<div class="bg-base-200 flex gap-4 overflow-hidden rounded-t-xl max-sm:p-2 sm:bg-transparent">
-		{#each cards as card, i}
+		{#each cards as card, i (card.id)}
 			<button
 				class={`tab ${tabText[i]} ${i === activeTab ? `max-sm:text-white ${tabBg[i]}` : ''}`}
 				onmouseenter={() => (activeTab = i)}
@@ -26,11 +26,11 @@
 
 	<!-- Content -->
 	<div class="flex items-start gap-4 overflow-hidden rounded-b-xl">
-		{#each cards as card, i}
+		{#each cards as card, i (card.id)}
 			<div class={`content ${i === activeTab ? 'flex' : 'hidden'}`}>
-				{#each Object.entries(card.bookmarks) as [name, url]}
-					<a class={`bookmark ${contentBg[i]}`} href={url}>
-						{name}
+				{#each card.bookmarks as bookmark (bookmark.id)}
+					<a class={`bookmark ${contentBg[i]}`} href={bookmark.url}>
+						{bookmark.label}
 					</a>
 				{/each}
 			</div>

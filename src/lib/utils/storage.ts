@@ -51,7 +51,7 @@ export function getStorageAPI<T>(storageKey: string): StorageAPI<T> {
 			}
 		};
 	}
-    
+
 	const listeners: OnChangeCallback<T>[] = [];
 
 	window.addEventListener('storage', (e: StorageEvent) => {

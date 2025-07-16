@@ -1,15 +1,19 @@
 <script lang="ts">
-	import Tabs from './lib/components/Tabs.svelte';
-	import Search from './lib/components/Search.svelte';
-	import { supportedEngines } from './lib/constants/search-engines';
-	import { config } from './lib/utils/config';
-	import { toggleTheme } from './lib/utils/theme';
-	import type { SearchEngine } from './lib/types';
+	import Tabs from '$lib/components/Tabs.svelte';
+	import Search from '$lib/components/Search.svelte';
+	import { getSearchEngineById } from '$lib/constants/search-engines';
+	import { config as currentConfig, subscribe } from '$lib/utils/user-config';
+	import { toggleTheme } from '$lib/utils/theme';
+	import Settings from '$lib/components/Settings.svelte';
+	import { onDestroy } from 'svelte';
 
-	const allSearchEngines: Record<SearchEngine, string> = $derived({
-		...supportedEngines,
-		...(config.customEngines || {})
+	let config = $state(currentConfig);
+
+	const unsubscribe = subscribe((cfg) => {
+		config = cfg;
 	});
+
+	onDestroy(() => unsubscribe());
 </script>
 
 <svelte:head>
@@ -31,9 +35,10 @@
 			>
 		</h1>
 
-		<Search searchEngine={config.searchEngine} {allSearchEngines} />
+		<Search searchEngine={getSearchEngineById(config.searchEngine)} />
 
 		<Tabs cards={config.cards} />
 		<!-- <button id="openSettingsBtn" class="btn btn-outline">⚙️ Settings</button> -->
+		<Settings bind:config />
 	</div>
 </section>

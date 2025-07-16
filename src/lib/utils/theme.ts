@@ -1,5 +1,5 @@
-import type { Theme, ThemeSetting } from '../types';
-import { getStorageAPI } from './storage';
+import type { Theme, ThemeSetting } from '$lib/types/user-config';
+import { getStorageAPI } from '$lib/utils/storage';
 
 const STORAGE_KEY = 'userTheme';
 const storage = getStorageAPI<ThemeSetting>(STORAGE_KEY);

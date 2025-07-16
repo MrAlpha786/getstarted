@@ -1,20 +1,16 @@
 <script lang="ts">
-	import type { SearchEngine } from '../types';
+	import type { SearchEngine } from '$lib/types/user-config';
 
-	const {
-		searchEngine,
-		allSearchEngines
-	}: { searchEngine: SearchEngine; allSearchEngines: Record<SearchEngine, string> } = $props();
+	const { searchEngine }: { searchEngine: SearchEngine } = $props();
 
 	let searchValue = $state('');
-	let placeholder = `Search ${searchEngine}...`;
+	let placeholder = `Search ${searchEngine.name}...`;
 	let searchIsEmpty = $derived(searchValue.trim() == '');
 
 	function performSearch(e: Event) {
 		e.preventDefault();
 		if (!searchValue) return;
-		const engineUrl = allSearchEngines[searchEngine] || allSearchEngines.Google;
-		window.open(engineUrl + encodeURIComponent(searchValue), '_self');
+		window.open(searchEngine.url + encodeURIComponent(searchValue), '_self');
 	}
 </script>
 
@@ -23,6 +19,7 @@
 >
 	<form class="w-full" onsubmit={(e) => performSearch(e)}>
 		<input
+			name="searchbar"
 			type="text"
 			{placeholder}
 			class="text-base-content w-full focus:outline-0"
