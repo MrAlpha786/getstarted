@@ -11,7 +11,7 @@
 	font-style: normal;
 	font-weight: 100 900;
 	font-display: swap;
-	src: url('/fonts/Roboto.ttf') format('truetype');
+	src: url('./assets/fonts/Roboto.ttf') format('truetype');
 }
 
 :root {

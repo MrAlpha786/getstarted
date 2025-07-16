@@ -1,5 +1,7 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { supportedEngines } from '$lib/constants/search-engines';
+
+z.config({ jitless: true });
 
 export const BookmarkSchema = z.object({
 	id: z.number(),

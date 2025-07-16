@@ -5,11 +5,12 @@
 </script>
 
 <div class="grid w-full gap-2">
-	<Label for="username">Username</Label>
+	<Label for="username-input-form-field">Username</Label>
 	<Input
 		id="username-input-form-field"
 		type="text"
 		name="username"
+		autocomplete="username"
 		bind:value={userName}
 		aria-invalid={!!error}
 	/>

@@ -34,7 +34,8 @@
 	{#each cards as card, i (card.id)}
 		<Tabs.Content value={'tab-' + (i + 1)}>
 			<div class="mb-2 flex gap-4">
-				<div class={'h-9 w-9 rounded-md border shadow-xs ' + tabBg[i]}></div>
+				<!-- TODO: Release this feature in version 1.1 -->
+				<!-- <div class={'h-9 w-9 rounded-md border shadow-xs ' + tabBg[i]}></div> -->
 				<div class="grid w-full gap-2">
 					<Input name="cardname" bind:value={card.name} aria-invalid={!!errors?.[i]?.name} />
 					{#if errors?.[i]?.name}

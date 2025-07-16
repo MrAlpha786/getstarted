@@ -9,9 +9,9 @@
 </script>
 
 <div class="grid w-full gap-2">
-	<Label for="searchEngine">Default Search Engine</Label>
-	<Select.Root name="searchEngine" type="single" bind:value={searchEngine}>
-		<Select.Trigger class="w-full" aria-invalid={!!error}>
+	<Label for="search-engine">Default Search Engine</Label>
+	<Select.Root name="search-engine" type="single" bind:value={searchEngine}>
+		<Select.Trigger id="search-engine" class="w-full" aria-invalid={!!error}>
 			{searchEngine ? getSearchEngineById(searchEngine).name : 'Select default search engine.'}
 		</Select.Trigger>
 		<Select.Content>

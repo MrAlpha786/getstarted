@@ -12,13 +12,23 @@
 		if (!searchValue) return;
 		window.open(searchEngine.url + encodeURIComponent(searchValue), '_self');
 	}
+
+	// This is a hack to get focus from browser searchbar
+	if (location.search !== '?x') {
+		location.search = '?x';
+		throw new Error(); // load everything on the next page;
+		// stop execution on this page
+	}
 </script>
 
 <div
 	class="bg-base-200 my-8 flex w-full flex-row items-center justify-between gap-4 rounded-xl p-3"
 >
 	<form class="w-full" onsubmit={(e) => performSearch(e)}>
+		<!-- svelte-ignore a11y_autofocus -->
 		<input
+			autofocus
+			id="search-bar-input"
 			name="searchbar"
 			type="text"
 			{placeholder}
