@@ -10,7 +10,7 @@
 
 	let { config = $bindable() }: { config: UserConfig } = $props();
 	let save = $state(false);
-	let sheetOpen = $state(true);
+	let sheetOpen = $state(false);
 	let confirmDialogOpen = $state(false);
 	let currentConfig = $state.snapshot(config);
 
