@@ -3,7 +3,6 @@
 	"short_name": "GetStarted",
 	"description": "Minimal & fast startpage for you browser.",
 	"version": "1.0.0",
-	"license": "MIT",
 	"author": "Muhammad Faizan",
 	"developer": {
 		"name": "Muhammad Faizan",

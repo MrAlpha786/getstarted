@@ -28,6 +28,10 @@
 	function handleSort(e: CustomEvent) {
 		items = e.detail.items;
 	}
+
+	// BUG: Keyboard Drag Controlls not working.
+	// BUG: List Element is not focused when drag handle is picked, causing unexpected scroll when last focused
+	// element is out of screen.
 </script>
 
 <div
