@@ -9,8 +9,11 @@
 	import * as Tabs from '$lib/components/ui/tabs';
 	import type { UserConfig } from '$lib/types/user-config';
 	import About from './About.svelte';
+	import { UserConfigSchema } from '$lib/schemas/user-config';
+	import { setNestedErrorWithIndexKeys } from '$lib/forms/user-config/util';
 
 	let { config = $bindable() }: { config: UserConfig } = $props();
+	let errors = $state({});
 	let save = $state(false);
 	let sheetOpen = $state(false);
 	let confirmDialogOpen = $state(false);
@@ -26,6 +29,21 @@
 		}
 		save = false;
 	});
+
+	function handleSubmitCallback(e: Event): boolean {
+		e.preventDefault();
+		errors = {};
+
+		const result = UserConfigSchema.safeParse(config);
+		if (!result.success) {
+			for (const issue of result.error.issues) {
+				setNestedErrorWithIndexKeys(errors, issue.path as (string | number)[], issue.message);
+			}
+			return false;
+		}
+
+		return true;
+	}
 </script>
 
 <Sheet.Root
@@ -66,7 +84,7 @@
 					<Label>{#snippet child({ props })}<span {...props}>Theme</span>{/snippet}</Label>
 					<ThemeToggle />
 				</div>
-				<UserConfigForm bind:save bind:config />
+				<UserConfigForm bind:errors bind:save bind:config onSubmitCallback={handleSubmitCallback} />
 			</Tabs.Content>
 			<Tabs.Content value="about">
 				<About />
@@ -81,12 +99,16 @@
 	description="You have unsaved changes. Do you want to save them before leaving?"
 	confirmText="Save Changes"
 	cancelText="Discard"
-	onConfirm={() => {
-		save = true;
-		confirmDialogOpen = false;
-		sheetOpen = false;
+	onConfirm={(e) => {
+		if (handleSubmitCallback(e)) {
+			saveConfig($state.snapshot(config));
+			sheetOpen = false;
+			confirmDialogOpen = false;
+		} else confirmDialogOpen = false;
 	}}
 	onCancel={() => {
+		config = currentConfig;
+		errors = {};
 		confirmDialogOpen = false;
 		sheetOpen = false;
 	}}

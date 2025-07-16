@@ -4,7 +4,7 @@
 	const { searchEngine }: { searchEngine: SearchEngine } = $props();
 
 	let searchValue = $state('');
-	let placeholder = `Search ${searchEngine.name}...`;
+	let placeholder = $derived(`Search ${searchEngine.name}...`);
 	let searchIsEmpty = $derived(searchValue.trim() == '');
 
 	function performSearch(e: Event) {

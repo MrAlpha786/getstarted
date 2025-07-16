@@ -21,7 +21,7 @@
 		onAddBookmark: (index: number) => void;
 	} = $props();
 
-	const tabBg = ['bg-tab1', 'bg-tab2', 'bg-tab3', 'bg-tab4'];
+	// const tabBg = ['bg-tab1', 'bg-tab2', 'bg-tab3', 'bg-tab4'];
 </script>
 
 <Tabs.Root bind:value={activeTab} class="mt-2 rounded-lg border p-2 shadow-xs">

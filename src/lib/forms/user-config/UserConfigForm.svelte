@@ -1,18 +1,24 @@
 <script lang="ts">
-	import { UserConfigSchema } from '$lib/schemas/user-config';
 	import type { UserConfig, UserConfigErrors } from '$lib/types/user-config';
 
 	import SearchEngineConfig from './components/SearchEngineConfig.svelte';
 	import UsernameConfig from './components/UsernameConfig.svelte';
 	import TabConfig from './components/TabConfig.svelte';
 	import { Button } from '$lib/components/ui/button/index';
-	import { setNestedErrorWithIndexKeys } from './util';
 	import ConfirmnDialog from '$lib/components/ConfirmnDialog.svelte';
 
-	let { save = $bindable(), config = $bindable() }: { save: boolean; config: UserConfig } =
-		$props();
+	let {
+		save = $bindable(),
+		config = $bindable(),
+		errors = $bindable(),
+		onSubmitCallback
+	}: {
+		save: boolean;
+		config: UserConfig;
+		errors: UserConfigErrors;
+		onSubmitCallback: (e: Event) => boolean;
+	} = $props();
 
-	let errors: UserConfigErrors = $state({});
 	let activeTab = $state('tab-1');
 	let confirmDialogOpen = $state(false);
 
@@ -21,20 +27,18 @@
 		config.cards = [...config.cards];
 	}
 
-	function handleSubmit(e: Event) {
-		e.preventDefault();
-		errors = {};
-
-		const result = UserConfigSchema.safeParse(config);
-		if (!result.success) {
-			for (const issue of result.error.issues) {
-				setNestedErrorWithIndexKeys(errors, issue.path, issue.message);
-			}
-
+	$effect(() => {
+		if (errors) {
 			const cardsWithErrors = Object.keys(errors.cards ?? {});
 			if (cardsWithErrors.length > 0) {
 				activeTab = `tab-${Number(cardsWithErrors[0]) + 1}`;
 			}
+			return;
+		}
+	});
+
+	function handleSubmit(e: Event) {
+		if (!onSubmitCallback(e)) {
 			return;
 		}
 

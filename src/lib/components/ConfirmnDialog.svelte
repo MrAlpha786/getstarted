@@ -16,8 +16,8 @@
 		description?: string;
 		confirmText?: string;
 		cancelText?: string;
-		onConfirm: () => void;
-		onCancel?: () => void;
+		onConfirm: (e: Event) => void;
+		onCancel?: (e: Event) => void;
 	} = $props();
 </script>
 
