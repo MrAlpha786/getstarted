@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/***
+ * This script is use to generate the manifest file of the extension
+ * usage: npm run manifest [chrome|firefox|safari]
+ */
 import { writeFileSync } from 'fs';
 import path from 'path';
 
-const targets = ['chrome', 'firefox', 'safari'] as const;
-type Target = (typeof targets)[number];
+export const targets = ['chrome', 'firefox', 'safari'] as const;
+export type Target = (typeof targets)[number];
 
-function getManifest(target: Target) {
+export function getManifest(target: Target) {
 	const base = {
 		name: 'GetStarted - Minimal & Fast',
 		short_name: 'GetStarted',
@@ -38,7 +42,7 @@ function getManifest(target: Target) {
 	return base;
 }
 
-function build(target: Target) {
+export function build(target: Target) {
 	const manifest = getManifest(target);
 	const dest = path.resolve('./dist/manifest.json');
 	writeFileSync(dest, JSON.stringify(manifest, null, 2));

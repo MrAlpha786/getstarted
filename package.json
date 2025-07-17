@@ -12,9 +12,9 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"build:chrome": "vite build && tsx scripts/manifest.build.ts chrome",
-		"build:firefox": "vite build && tsx scripts/manifest.build.ts firefox",
-		"build:safari": "vite build && tsx scripts/manifest.build.ts safari",
+		"manifest": "tsx scripts/manifest.ts",
+		"bundle": "tsx scripts/bundle.ts",
+		"release": "vite build --mode production && tsx scripts/bundle.ts chrome && tsx scripts/bundle.ts firefox && tsx scripts/bundle.ts safari",
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
 		"lint": "eslint . && prettier --check .",
