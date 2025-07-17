@@ -5,6 +5,7 @@ export function setNestedErrorWithIndexKeys(
 	path: (string | number)[],
 	message: string
 ) {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let current: any = obj;
 	for (let i = 0; i < path.length; i++) {
 		const key = path[i];

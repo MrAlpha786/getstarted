@@ -13,11 +13,12 @@
 		window.open(searchEngine.url + encodeURIComponent(searchValue), '_self');
 	}
 
-	let q = "?"; if (location.search !== q && !location.href.includes(q)) location.search = q;
+	// this is a hack to get focus from chrome searchbar, only publish extension with this.
+	// let q = "?"; if (location.search !== q && !location.href.includes(q)) location.search = q;
 </script>
 
 <div
-	class="bg-base-200 my-8 flex w-full flex-row items-center justify-between gap-4 rounded-xl p-3"
+	class="bg-base-200 my-8 flex w-full flex-row items-center justify-between gap-4 rounded-xl p-3 border border-transparent focus-within:border-ring"
 >
 	<form class="w-full" onsubmit={(e) => performSearch(e)}>
 		<!-- svelte-ignore a11y_autofocus -->

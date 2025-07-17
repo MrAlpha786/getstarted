@@ -4,7 +4,6 @@
 	"description": "Minimal & fast startpage for you browser.",
 	"version": "1.0.0",
 	"author": "Muhammad Faizan",
-	"developer": { "name": "Muhammad Faizan", "url": "https://mfaizan.com" },
 	"manifest_version": 3,
 	"chrome_url_overrides": { "newtab": "index.html" },
 	"icons": {

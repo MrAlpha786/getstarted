@@ -10,8 +10,8 @@
 
 <div class="my-4 space-y-6 px-4 text-sm">
 	<div class="flex flex-col items-center gap-2">
-		<img src="./icon/android-chrome-512x512.png" alt="GetStarted Icon" class="size-36">
-		<h1 class="text-2xl font-bold font-logo">GetStarted</h1>
+		<img src="./icon/android-chrome-512x512.png" alt="GetStarted Icon" class="size-36" />
+		<h1 class="font-logo text-2xl">GetStarted</h1>
 	</div>
 	<!-- About Section -->
 	<section>
