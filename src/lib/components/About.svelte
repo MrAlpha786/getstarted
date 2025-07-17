@@ -6,12 +6,15 @@
 	import Globe from '@lucide/svelte/icons/globe';
 	import AtSign from '@lucide/svelte/icons/at-sign';
 	import ChevronDown from '@lucide/svelte/icons/chevron-down';
+
+	const version = import.meta.env.APP_VERSION;
 </script>
 
-<div class="my-4 space-y-6 px-4 text-sm">
-	<div class="flex flex-col items-center gap-2">
+<div class="my-4 px-4 text-sm">
+	<div class="flex flex-col items-center">
 		<img src="./icon/android-chrome-512x512.png" alt="GetStarted Icon" class="size-36" />
-		<h1 class="font-logo text-2xl">GetStarted</h1>
+		<h1 class="font-logo mt-2 text-2xl">GetStarted</h1>
+		<p class="text-muted-foreground text-xs">v{version}</p>
 	</div>
 	<!-- About Section -->
 	<section>
@@ -124,5 +127,10 @@ THE SOFTWARE.
 			external servers).
 		</p>
 		<p class="mt-1">No telemetry, ads, or account needed — just fast, focused productivity.</p>
+	</section>
+
+	<!-- Copyright Section -->
+	<section class="text-muted-foreground mt-6 text-center text-xs">
+		GetStarted v{version} &copy; {new Date().getFullYear()} Muhammad Faizan. All rights reserved.
 	</section>
 </div>
