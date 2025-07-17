@@ -18,7 +18,7 @@
 </script>
 
 <div
-	class="bg-base-200 my-8 flex w-full flex-row items-center justify-between gap-4 rounded-xl p-3 border border-transparent focus-within:border-ring"
+	class="bg-base-200 focus-within:border-ring my-8 flex w-full flex-row items-center justify-between gap-4 rounded-xl border border-transparent p-3"
 >
 	<form class="w-full" onsubmit={(e) => performSearch(e)}>
 		<!-- svelte-ignore a11y_autofocus -->
