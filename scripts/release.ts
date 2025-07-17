@@ -34,6 +34,7 @@ function runBuildCommands() {
 	execSync(`tsx scripts/bundle.ts safari`, { stdio: 'inherit' });
 	execSync(`tsx scripts/bundle.ts firefox`, { stdio: 'inherit' });
 	execSync(`tsx scripts/bundle.ts chrome`, { stdio: 'inherit' });
+    execSync(`git add package.json && git commit -S -m "Bump v${currentVersion} -> v${version}"`)
 	execSync(`git tag -a v${version} -m "Release version ${version}"`);
 }
 
