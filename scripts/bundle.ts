@@ -4,8 +4,9 @@
  */
 import path from 'path';
 import { build as buildManifest, Target, targets } from './manifest';
-import { existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
+import { existsSync, mkdirSync, rmSync } from 'fs';
 import { execSync } from 'child_process';
+import pkg from '../package.json' assert { type: 'json' };
 
 function build(target: Target) {
 	// Move manifest to dist
@@ -15,10 +16,7 @@ function build(target: Target) {
 	const artifactsDir = path.resolve('./artifacts');
 	if (!existsSync(artifactsDir)) mkdirSync(artifactsDir);
 
-	const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));
-	const version = pkg.version || '0.0.0';
-
-	const zipName = `GetStarted-v${version}-${target}.zip`;
+	const zipName = `GetStarted-v${pkg.version}-${target}.zip`;
 	const zipPath = path.join(artifactsDir, zipName);
 
 	if (existsSync(zipPath)) rmSync(zipPath);

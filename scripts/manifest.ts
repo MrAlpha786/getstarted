@@ -5,6 +5,7 @@
  */
 import { writeFileSync } from 'fs';
 import path from 'path';
+import pkg from '../package.json' assert { type: 'json' };
 
 export const targets = ['chrome', 'firefox', 'safari'] as const;
 export type Target = (typeof targets)[number];
@@ -15,7 +16,7 @@ export function getManifest(target: Target) {
 		short_name: 'GetStarted',
 		description: 'Minimal & fast startpage for your browser.',
 		author: 'Muhammad Faizan',
-		version: '0.0.0.1',
+		version: pkg.version,
 		manifest_version: 3,
 		icons: {
 			'16': 'icon/favicon-16x16.png',
