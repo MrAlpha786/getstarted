@@ -7,6 +7,28 @@
 <a href="/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/mralpha786/getstarted"></a>
 </p>
 
+## Screenshots
+
+<!-- <p align="center">
+<img src="asset/getstarted.gif"/>
+</p>
+<hr/> -->
+
+[<img src="asset/phone-light.png" width="160" />](asset/phone-light.png)
+[<img src="asset/phone-dark.png" width="160" />](asset/phone-dark.png)
+[<img src="asset/phone-settings-light.png" width="160" />](asset/phone-settings-light.png)
+[<img src="asset/phone-settings-dark.png" width="160" />](asset/phone-settings-dark.png)
+<br/>
+[<img src="asset/ipad-light.png" width="200" />](asset/ipad-light.png)
+[<img src="asset/ipad-dark.png" width="200" />](asset/ipad-dark.png)
+[<img src="asset/ipad-settings-light.png" width="200" />](asset/ipad-settings-light.png)
+[<img src="asset/ipad-settings-dark.png" width="200" />](asset/ipad-settings-dark.png)
+<br/>
+[<img src="asset/desktop-light.png" width="405" />](asset/desktop-light.png)
+[<img src="asset/desktop-dark.png" width="405" />](asset/desktop-dark.png)
+[<img src="asset/desktop-settings-light.png" width="405" />](asset/desktop-settings-light.png)
+[<img src="asset/desktop-settings-dark.png" width="405" />](asset/desktop-settings-dark.png)
+
 ## Description
 
 GetStarted replaces your browser's default new tab with a distraction-free startpage. It focuses on simplicity, clarity, and utility. You get a centered search bar and your most important bookmarks grouped into categories. That's it.
@@ -23,13 +45,15 @@ This extension works across Chrome, Firefox, and Safari. Your settings are autom
 - Built-in search bar and keyboard navigation
 
 ## Installation
+
 ### Available on:
+
 - [Chrome Web Store](#) (Coming Soon)
 - [Firefox Add-ons](#) (Coming Soon)
 
 ### Manual Installation For Testing Purposes
 
-1. Go to [Latest Release](https://github.com/mralpha786/getstarted/releases/latest)  
+1. Go to [Latest Release](https://github.com/mralpha786/getstarted/releases/latest)
 2. Download the `.zip` for your browser:
    - `getstarted-*-chrome.zip`
    - `getstarted-*-firefox.zip`
@@ -63,13 +87,15 @@ npm run dev
 ```
 
 ### To test as an extension
+
 ```bash
 npm run build
 npm run manifest firefox
 ```
+
 - Build will be in `/dist`
 - Follow the [Manual Installation Instruction](#manual-installation-for-testing-purposes)
-  
+
 > `/dist` is hardcoded as the default build location. A lot of scripts (e.g. `npm run manifest`) check for files in this directory.
 
 # Contributions
@@ -87,4 +113,5 @@ If you find this extension helpful and would like to support its ongoing develop
 Thank you for your support!
 
 # License
+
 MIT License - see [LICENSE](./LICENSE) for details.
