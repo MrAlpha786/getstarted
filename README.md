@@ -1,11 +1,90 @@
-# GetStarted - A Simple Responsive Startpage
+<p align="center"><a href="#"><img width="120" src="public/favicon.svg"/></a></p>
+<h1 align="center">GetStarted – Minimal & Fast</h1>
+<p align="center">Minimal & fast startpage for you browser.</p>
 
-![Gif](asset/getstarted.gif)
+<p align="center">
+<a href="https://github.com/mralpha786/getstarted/releases/latest"><img alt="Github Latest Release" src="https://img.shields.io/github/v/release/mralpha786/getstarted?style=flat&color=dodgerblue"/></a>
+<a href="/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/mralpha786/getstarted"></a>
+</p>
 
-Getstarted is a simple, clean startpage which can be used on any device like phone, pad, desktop, etc.
+## Description
 
-It has dark and light mode. And website links are customizable.
+GetStarted replaces your browser's default new tab with a distraction-free startpage. It focuses on simplicity, clarity, and utility. You get a centered search bar and your most important bookmarks grouped into categories. That's it.
 
-## Customizations
+This extension works across Chrome, Firefox, and Safari. Your settings are automatically synced using browser sync storage. It’s responsive and works across all screen sizes.
 
-See `config.js` file for customization.
+### Features
+
+- Light and dark mode toggle
+- Configurable bookmarks with categories
+- Responsive layout for all screen sizes
+- Automatic syncing of settings using browser sync storage
+- Settings preserved locally across sessions
+- Built-in search bar and keyboard navigation
+
+## Installation
+### Available on:
+- [Chrome Web Store](#) (Coming Soon)
+- [Firefox Add-ons](#) (Coming Soon)
+
+### Manual Installation For Testing Purposes
+
+1. Go to [Latest Release](https://github.com/mralpha786/getstarted/releases/latest)  
+2. Download the `.zip` for your browser:
+   - `getstarted-*-chrome.zip`
+   - `getstarted-*-firefox.zip`
+   - `getstarted-*-safari.zip`
+3. Unzip and follow your browser’s guide to install unpacked extensions:
+
+#### Chrome
+
+1. Open `chrome://extensions/`
+2. Enable Developer mode
+3. Click Load unpacked and select the extracted folder
+
+#### Firefox
+
+1. Open about:debugging
+2. Click This Firefox
+3. Click Load Temporary Add-on and select manifest.json in the extracted folder
+
+#### Safari
+
+1. Open `Settings` and go to the `Advanced` tab
+2. Enable `Show features for web developers`, a new `Developer` tab will be added to settings.
+3. Go to `Developer` and click Add Temporary Extension
+4. Select the extracted folder and enable extension.
+
+## 🛠️ Development
+
+```bash
+npm install
+npm run dev
+```
+
+### To test as an extension
+```bash
+npm run build
+npm run manifest firefox
+```
+- Build will be in `/dist`
+- Follow the [Manual Installation Instruction](#manual-installation-for-testing-purposes)
+  
+> `/dist` is hardcoded as the default build location. A lot of scripts (e.g. `npm run manifest`) check for files in this directory.
+
+# Contributions
+
+Contributions are welcome. Please open an issue to discuss any changes before submitting a pull request. Ensure code is linted, tested, and adheres to the project's style.
+
+# Donation
+
+If you find this extension helpful and would like to support its ongoing development, consider making a donation. Your contribution helps cover the costs of development, testing, browser publishing fees, and maintaining the project over time.
+
+**Remember:** GetStarted will always remain free and open source. But if you'd like to show your appreciation, even a small amount goes a long way.
+
+<a href='https://ko-fi.com/mfaizanx/tip' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
+Thank you for your support!
+
+# License
+MIT License - see [LICENSE](./LICENSE) for details.
