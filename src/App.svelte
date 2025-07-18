@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-	<title>GetStarted</title>
+	<title>GetStarted - Minimal & Fast Startpage</title>
 	<meta
 		name="description"
 		content="GetStarted is a fast, minimal, and customizable offline startpage and PWA by MrAlpha786. Organize bookmarks, search with your favorite engine, and boost your productivity."

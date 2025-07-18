@@ -12,7 +12,7 @@ export type Target = (typeof targets)[number];
 
 export function getManifest(target: Target) {
 	const base = {
-		name: 'GetStarted - Minimal & Fast',
+		name: 'GetStarted - Minimal & Fast Startpage',
 		short_name: 'GetStarted',
 		description: 'Minimal & fast startpage for your browser.',
 		author: 'Muhammad Faizan',

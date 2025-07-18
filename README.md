@@ -1,5 +1,5 @@
 <p align="center"><a href="#"><img width="120" src="public/favicon.svg"/></a></p>
-<h1 align="center">GetStarted – Minimal & Fast</h1>
+<h1 align="center">GetStarted – Minimal & Fast Startpage</h1>
 <p align="center">Minimal & fast startpage for you browser.</p>
 
 <p align="center">
