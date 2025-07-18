@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.1 - Update package name
+
+### Changes
+- Fix the long name to include the word `startpage`.
+
 ## v0.2.0 – Semantic Versioning & About Page
 
 ### Features
