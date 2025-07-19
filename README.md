@@ -80,23 +80,35 @@ This extension works across Chrome, Firefox, and Safari. Your settings are autom
 4. Select the extracted folder and enable extension.
 
 ## 🛠️ Development
+### Requirements
+ - Nodejs (v22)
+ - pnpm (v10.13.1)
 
+### Initial setup
 ```bash
-npm install
-npm run dev
+pnpm install
+```
+
+### To test in development
+```bash
+pnpm run dev
 ```
 
 ### To test as an extension
 
 ```bash
-npm run build
-npm run manifest firefox
+pnpm run build
+pnpm run bundle firefox
 ```
 
-- Build will be in `/dist`
+- Build will be in `/dist` and a zipped version will be in `/artifects`.
 - Follow the [Manual Installation Instruction](#manual-installation-for-testing-purposes)
 
-> `/dist` is hardcoded as the default build location. A lot of scripts (e.g. `npm run manifest`) check for files in this directory.
+> [!Caution]
+> `/dist` is hardcoded as the default build location. A lot of scripts (e.g. `npm run bundle`) check for files in this directory.
+
+> [!Note]
+> `pnpm run bundle` require `chrome`, `firefox`, or `safari` as a required argument.
 
 # Contributions
 
