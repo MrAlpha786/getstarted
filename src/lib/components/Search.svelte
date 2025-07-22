@@ -1,19 +1,21 @@
 <script lang="ts">
 	import type { SearchEngine } from '$lib/types/user-config';
+	import { isFirefox } from '$lib/utils/browser';
 
 	const { searchEngine }: { searchEngine: SearchEngine } = $props();
 
 	let searchValue = $state('');
-	let placeholder = $derived(`Search ${searchEngine.name}...`);
+	let placeholder = $derived(`Search ${isFirefox() ? searchEngine.name : ''}...`);
 	let searchIsEmpty = $derived(searchValue.trim() == '');
 
 	function performSearch(e: Event) {
 		e.preventDefault();
 		if (!searchValue) return;
-		window.open(searchEngine.url + encodeURIComponent(searchValue), '_self');
+		if (!isFirefox()) window.chrome.search.query({ text: searchValue });
+		else window.open(searchEngine.url + encodeURIComponent(searchValue), '_self');
 	}
 
-	// this is a hack to get focus from chrome searchbar, only publish extension with this.
+	// this is a hack to get focus from chrome searchbar, only publish extension without this.
 	// let q = "?"; if (location.search !== q && !location.href.includes(q)) location.search = q;
 </script>
 
@@ -30,6 +32,10 @@
 			{placeholder}
 			class="text-base-content w-full focus:outline-0"
 			bind:value={searchValue}
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="off"
+			spellcheck="false"
 		/>
 	</form>
 

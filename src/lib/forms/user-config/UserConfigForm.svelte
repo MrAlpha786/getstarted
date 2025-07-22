@@ -6,6 +6,7 @@
 	import TabConfig from './components/TabConfig.svelte';
 	import { Button } from '$lib/components/ui/button/index';
 	import ConfirmnDialog from '$lib/components/ConfirmnDialog.svelte';
+	import { isFirefox } from '$lib/utils/browser';
 
 	let {
 		save = $bindable(),
@@ -49,7 +50,9 @@
 <form class="grid w-full gap-4 p-4" onsubmit={handleSubmit}>
 	<div class="flex w-full items-start gap-4 max-sm:flex-col">
 		<UsernameConfig bind:userName={config.userName} error={errors.userName} />
-		<SearchEngineConfig bind:searchEngine={config.searchEngine} error={errors.searchEngine} />
+		{#if isFirefox()}
+			<SearchEngineConfig bind:searchEngine={config.searchEngine} error={errors.searchEngine} />
+		{/if}
 	</div>
 
 	<TabConfig

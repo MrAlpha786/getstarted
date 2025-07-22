@@ -1,3 +1,5 @@
+import { isChrome, isFirefox } from '$lib/utils/browser';
+
 type OnChangeCallback<T> = (newValue: T | null, oldValue: T | null) => void;
 
 export interface StorageAPI<T> {
@@ -8,7 +10,7 @@ export interface StorageAPI<T> {
 
 export function getStorageAPI<T>(storageKey: string): StorageAPI<T> {
 	// Firefox
-	if (window.browser && browser.runtime) {
+	if (isFirefox()) {
 		return {
 			get: async (key: string) => {
 				const result = await browser.storage.sync.get(key);
@@ -29,7 +31,7 @@ export function getStorageAPI<T>(storageKey: string): StorageAPI<T> {
 	}
 
 	// Chrome
-	if (window.chrome && chrome.runtime && chrome.runtime.id) {
+	if (isChrome()) {
 		return {
 			get: (key: string) =>
 				new Promise<T | null>((resolve) => {

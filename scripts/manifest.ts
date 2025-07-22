@@ -31,7 +31,9 @@ export function getManifest(target: Target) {
 	const newtab = { newtab: 'index.html' };
 	base.chrome_url_overrides = newtab;
 
-	if (target === 'firefox') {
+	if (target === 'chrome') {
+		base.permissions.push('search');
+	} else if (target === 'firefox') {
 		base.browser_specific_settings = {
 			gecko: { id: 'getstarted@mfaizan.com' }
 		};
