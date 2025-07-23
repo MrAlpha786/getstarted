@@ -3,6 +3,8 @@
 <p align="center">Minimal & fast startpage for you browser.</p>
 
 <p align="center">
+<a href="https://chromewebstore.google.com/detail/getstarted-minimal-fast-s/gegjomjnkboaliomeoedmdgefofeplgc"><img alt="Chrome Web Store Version" src="https://img.shields.io/chrome-web-store/v/gegjomjnkboaliomeoedmdgefofeplgc"></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/getstarted-startpage/"><img alt="Mozilla Add-on Version" src="https://img.shields.io/amo/v/getstarted-startpage"></a>
 <a href="https://github.com/mralpha786/getstarted/releases/latest"><img alt="Github Latest Release" src="https://img.shields.io/github/v/release/mralpha786/getstarted?style=flat&color=dodgerblue"/></a>
 <a href="/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/mralpha786/getstarted"></a>
 </p>
@@ -48,8 +50,8 @@ This extension works across Chrome, Firefox, and Safari. Your settings are autom
 
 ### Available on:
 
-- [Chrome Web Store](#) (Coming Soon)
-- [Firefox Add-ons](#) (Coming Soon)
+- [Chrome Web Store](https://chromewebstore.google.com/detail/gegjomjnkboaliomeoedmdgefofeplgc?utm_source=item-share-cb)
+- [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/getstarted-startpage/)
 
 ### Manual Installation For Testing Purposes
 
