@@ -3,6 +3,10 @@
 <p align="center">Minimal & fast startpage for you browser.</p>
 
 <p align="center">
+<a href="https://chromewebstore.google.com/detail/getstarted-minimal-fast-s/gegjomjnkboaliomeoedmdgefofeplgc"><img alt="Chrome Web Store" src="asset/chrome-branding.png" width=200></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/getstarted-startpage/"><img alt="Mozilla Add-on Version" src="asset/firefox-branding.png" width=150></a>
+</p>
+<p align="center">
 <a href="https://chromewebstore.google.com/detail/getstarted-minimal-fast-s/gegjomjnkboaliomeoedmdgefofeplgc"><img alt="Chrome Web Store Version" src="https://img.shields.io/chrome-web-store/v/gegjomjnkboaliomeoedmdgefofeplgc"></a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/getstarted-startpage/"><img alt="Mozilla Add-on Version" src="https://img.shields.io/amo/v/getstarted-startpage"></a>
 <a href="https://github.com/mralpha786/getstarted/releases/latest"><img alt="Github Latest Release" src="https://img.shields.io/github/v/release/mralpha786/getstarted?style=flat&color=dodgerblue"/></a>
