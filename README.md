@@ -5,6 +5,9 @@
 <p align="center">
 <a href="https://chromewebstore.google.com/detail/getstarted-minimal-fast-s/gegjomjnkboaliomeoedmdgefofeplgc"><img alt="Chrome Web Store" src="asset/chrome-branding.png" width=200></a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/getstarted-startpage/"><img alt="Mozilla Add-on Version" src="asset/firefox-branding.png" width=150></a>
+<a href="https://apps.microsoft.com/detail/0RDCKG2QPN6W?referrer=appbadge&launch=true&mode=full">
+	<img src="asset/microsoft-branding.svg" width="190"/>
+</a>
 </p>
 <p align="center">
 <a href="https://chromewebstore.google.com/detail/getstarted-minimal-fast-s/gegjomjnkboaliomeoedmdgefofeplgc"><img alt="Chrome Web Store Version" src="https://img.shields.io/chrome-web-store/v/gegjomjnkboaliomeoedmdgefofeplgc"></a>
@@ -86,16 +89,20 @@ This extension works across Chrome, Firefox, and Safari. Your settings are autom
 4. Select the extracted folder and enable extension.
 
 ## 🛠️ Development
+
 ### Requirements
- - Nodejs (v22)
- - pnpm (v10.13.1)
+
+- Nodejs (v22)
+- pnpm (v10.13.1)
 
 ### Initial setup
+
 ```bash
 pnpm install
 ```
 
 ### To test in development
+
 ```bash
 pnpm run dev
 ```
