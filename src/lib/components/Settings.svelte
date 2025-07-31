@@ -11,6 +11,7 @@
 	import About from './About.svelte';
 	import { UserConfigSchema } from '$lib/schemas/user-config';
 	import { setNestedErrorWithIndexKeys } from '$lib/forms/user-config/util';
+	import SettingsImportExport from './SettingsImportExport.svelte';
 
 	let { config = $bindable() }: { config: UserConfig } = $props();
 	let errors = $state({});
@@ -81,6 +82,7 @@
 				</Sheet.Header>
 
 				<div class="grid gap-2 px-4">
+					<SettingsImportExport bind:config />
 					<Label>{#snippet child({ props })}<span {...props}>Theme</span>{/snippet}</Label>
 					<ThemeToggle />
 				</div>

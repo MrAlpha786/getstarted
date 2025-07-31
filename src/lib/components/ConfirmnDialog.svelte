@@ -8,8 +8,8 @@
 		description = '',
 		confirmText = 'Confirm',
 		cancelText = 'Cancel',
-		onConfirm,
-		onCancel = () => (open = false)
+		onConfirm = () => (open = false),
+		onCancel
 	}: {
 		open?: boolean;
 		title?: string;
@@ -37,7 +37,9 @@
 		</Dialog.Header>
 
 		<Dialog.Footer class="mt-4 flex justify-end gap-2">
-			<Button variant="ghost" onclick={onCancel}>{cancelText}</Button>
+			{#if onCancel && cancelText}
+				<Button variant="ghost" onclick={onCancel}>{cancelText}</Button>
+			{/if}
 			<Button id="dialog-config-button" onclick={onConfirm}>{confirmText}</Button>
 		</Dialog.Footer>
 	</Dialog.Content>
