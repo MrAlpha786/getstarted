@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0 - Settings Import/Export, Compatibility, and UI Polish
+
+### Features
+
+- Import/export for user settings with versioned JSON files
+
 ## v0.2.1 - Update package name
 
 ### Changes
