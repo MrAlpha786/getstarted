@@ -20,6 +20,8 @@ export interface Card {
 }
 
 export interface UserConfig {
+	version: string;
+	migrationId: number;
 	userName: string;
 	searchEngine: string;
 	customEngines?: SearchEngine[];

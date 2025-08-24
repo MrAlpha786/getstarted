@@ -7,10 +7,8 @@
 	import Download from '@lucide/svelte/icons/download';
 	import { tryImportUserConfig } from '$lib/utils/importUserConfig';
 
-	let {
-		config = $bindable(),
-		onImport
-	}: { config: UserConfig; onImport?: (config: UserConfig) => void } = $props();
+	let { config, onImport }: { config: UserConfig; onImport: (config: UserConfig) => void } =
+		$props();
 
 	const VERSION = import.meta.env.APP_VERSION || 'unknown';
 
@@ -53,11 +51,8 @@
 						showDialog(msg, 'Import Error');
 						return;
 					}
-					if (result.config != null) {
-						if (onImport) onImport(result.config);
-						else config = result.config;
-					}
-                    showDialog(`Settings imported successfully from ${file.name}.`, 'Import Successful');
+					if (result.config != null && onImport) onImport(result.config);
+					showDialog(`Settings imported successfully from ${file.name}.`, 'Import Successful');
 				} catch {
 					showDialog('Invalid settings file.');
 				}

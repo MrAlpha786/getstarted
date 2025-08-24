@@ -1,11 +1,12 @@
 import type { UserConfig } from '$lib/types/user-config';
 import defaultConfig from '$lib/config/default-config';
 import { getStorageAPI } from '$lib/utils/storage';
+import { checkPendingMigrations, migrateUserConfig } from './migrateUserConfig';
 
 const STORAGE_KEY = 'userConfig';
 const storage = getStorageAPI<UserConfig>(STORAGE_KEY);
 
-// Internal config object
+// Internal config object is a global variable, defaultConfig is only a fallback
 export const config: UserConfig = structuredClone(defaultConfig);
 
 // Subscriber pattern
@@ -24,11 +25,16 @@ export function subscribe(callback: Subscriber) {
 	return () => subscribers.delete(callback);
 }
 
-// Initialize config from storage
 await storage.get(STORAGE_KEY).then((stored) => {
 	if (stored) {
-		Object.assign(config, stored);
-		notifySubscribers();
+		// If stored version is different, then migrate
+		if (checkPendingMigrations(stored)) {
+			const migrated = migrateUserConfig(stored);
+			saveConfig(migrated);
+		} else {
+			Object.assign(config, stored);
+			notifySubscribers();
+		}
 	}
 });
 

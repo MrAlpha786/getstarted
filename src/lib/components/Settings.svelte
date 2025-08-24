@@ -22,14 +22,19 @@
 
 	$effect(() => {
 		if (save) {
-			if (JSON.stringify($state.snapshot(config)) !== JSON.stringify(currentConfig)) {
-				saveConfig($state.snapshot(config));
-				currentConfig = $state.snapshot(config);
-			}
+			saveAndUpdateConfig(config);
 			sheetOpen = false;
 		}
 		save = false;
 	});
+
+	function saveAndUpdateConfig(configToSave: UserConfig) {
+		if (JSON.stringify($state.snapshot(configToSave)) !== JSON.stringify(currentConfig)) {
+			config = configToSave;
+			saveConfig($state.snapshot(config));
+			currentConfig = $state.snapshot(config);
+		}
+	}
 
 	function handleSubmitCallback(e: Event): boolean {
 		e.preventDefault();
@@ -82,7 +87,10 @@
 				</Sheet.Header>
 
 				<div class="grid gap-2 px-4">
-					<SettingsImportExport bind:config />
+					<SettingsImportExport
+						{config}
+						onImport={(importedConfig) => saveAndUpdateConfig(importedConfig)}
+					/>
 					<Label>{#snippet child({ props })}<span {...props}>Theme</span>{/snippet}</Label>
 					<ThemeToggle />
 				</div>

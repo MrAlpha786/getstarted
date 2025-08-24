@@ -1,6 +1,8 @@
 import type { UserConfig } from '$lib/types/user-config';
 
 const defaultConfig: UserConfig = {
+	version: import.meta.env.APP_VERSION,
+	migrationId: 30250820,
 	userName: 'Faizan',
 	searchEngine: 'google',
 	customEngines: undefined,
