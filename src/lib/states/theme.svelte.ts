@@ -25,4 +25,21 @@ export class ThemeState {
 		}
 		document.documentElement.dataset.theme = this.#activeTheme;
 	}
+
+	rotate() {
+		const current = this.#activeTheme === 'system' ? this.resolvePreferredTheme() : this.#activeTheme;
+		const options: Theme[] = Themes.filter((t) => t !== 'system' );
+		const currentIndex = options.indexOf(current);
+		const nextIndex = (currentIndex + 1) % options.length;
+		this.#activeTheme = options[nextIndex];
+	}
+
+	isPreferredDark(): boolean {
+		if (typeof window === 'undefined') return false;
+		return window.matchMedia('(prefers-color-scheme: dark)').matches;
+	}
+
+	resolvePreferredTheme(): Theme {
+		return this.isPreferredDark() ? 'dark' : 'light';
+	}
 }

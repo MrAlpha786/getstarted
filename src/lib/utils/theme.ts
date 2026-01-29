@@ -7,15 +7,9 @@ const storage = getStorageAPI<Theme>(STORAGE_KEY);
 export const themeState = new ThemeState();
 
 export function toggleTheme() {
-	let isDark: boolean;
-	if (themeState.theme === 'system') {
-		isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-	}
-	else {
-		isDark = themeState.theme === 'dark';
-	}
-	const theme = isDark ? 'light' : 'dark';
-	setTheme(theme);
+	themeState.rotate();
+	themeState.apply();
+	storage.set(STORAGE_KEY, themeState.theme);
 }
 
 export function setTheme(theme: Theme) {
