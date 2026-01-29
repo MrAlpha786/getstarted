@@ -92,7 +92,7 @@
 			</div>
 
 			<Collapsible.Content class="bg-base-200 mt-2 rounded-lg border p-4 text-left text-sm">
-				<pre class="max-h-[30rem] overflow-auto break-words whitespace-pre-wrap"><code>
+				<pre class="max-h-120 overflow-auto wrap-break-word whitespace-pre-wrap"><code>
 MIT License Copyright (c) 2025 Muhammad Faizan
 
 Permission is hereby granted,

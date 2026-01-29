@@ -25,7 +25,7 @@
 </svelte:head>
 
 <section>
-	<div id="container" class="mx-auto flex h-full w-[90%] max-w-[50rem] flex-col pt-[20vh]">
+	<div id="container" class="mx-auto flex h-full w-[90%] max-w-200 flex-col pt-[20vh]">
 		<h1 class="mb-4 text-center text-4xl font-bold">
 			Hi,
 			<button
