@@ -6,22 +6,18 @@
 	import { setTheme, themeState } from '$lib/utils/theme';
 	import type { Theme } from '$lib/states/theme.svelte';
 
-	let themesetting: Theme = $state(themeState.theme);
-	// svelte-ignore state_referenced_locally
-	let previous: Theme = themesetting;
+	let current: Theme = $state(themeState.theme);
+	let previous: Theme = themeState.theme;
 
 	$effect(() => {
-		// toggling again same button set its value to empty string
-		if (!themesetting) {
-			themesetting = previous;
-			return;
-		}
-		previous = themesetting;
-		setTheme(themesetting);
+	if (current !== previous) {
+		previous = current;
+		setTheme(current);
+	}
 	});
 </script>
 
-<ToggleGroup.Root bind:value={themesetting} variant="outline" type="single" class="w-full">
+<ToggleGroup.Root bind:value={current} variant="outline" type="single" class="w-full">
 	<ToggleGroup.Item value="system" aria-label="Select System Theme">
 		<AppWindowMac class="size-4" /><span>System</span>
 	</ToggleGroup.Item>

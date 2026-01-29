@@ -14,7 +14,7 @@ export function toggleTheme() {
 
 export function setTheme(theme: Theme) {
 	if (theme === themeState.theme) return;
-	
+
 	themeState.theme = theme;
 	themeState.apply();
 	storage.set(STORAGE_KEY, theme);

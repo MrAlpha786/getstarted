@@ -2,36 +2,36 @@ export const Themes = ['system', 'light', 'dark'] as const;
 export type Theme = (typeof Themes)[number];
 
 export class ThemeState {
-	#activeTheme: Theme;
+	private activeTheme: Theme;
 
 	constructor(initialTheme: Theme = 'system') {
-		this.#activeTheme = $state(initialTheme);
+		this.activeTheme = initialTheme;
 	}
 
 	get theme(): Theme {
-		return this.#activeTheme;
+		return this.activeTheme;
 	}
 
 	set theme(value: Theme) {
-		this.#activeTheme = value;
+		this.activeTheme = value;
 	}
 
 	apply() {
 		if (typeof window === 'undefined') return;
 
-		if (this.#activeTheme === 'system') {
+		if (this.activeTheme === 'system') {
 			document.documentElement.removeAttribute('data-theme');
 			return;
 		}
-		document.documentElement.dataset.theme = this.#activeTheme;
+		document.documentElement.dataset.theme = this.activeTheme;
 	}
 
 	rotate() {
-		const current = this.#activeTheme === 'system' ? this.resolvePreferredTheme() : this.#activeTheme;
-		const options: Theme[] = Themes.filter((t) => t !== 'system' );
+		const current = this.activeTheme === 'system' ? this.resolvePreferredTheme() : this.activeTheme;
+		const options: Theme[] = Themes.filter((t) => t !== 'system');
 		const currentIndex = options.indexOf(current);
 		const nextIndex = (currentIndex + 1) % options.length;
-		this.#activeTheme = options[nextIndex];
+		this.activeTheme = options[nextIndex];
 	}
 
 	isPreferredDark(): boolean {
