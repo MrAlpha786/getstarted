@@ -1,10 +1,10 @@
 import type { UserConfig } from '$lib/types/user-config';
 import defaultConfig from '$lib/config/default-config';
-import { getStorageAPI } from '$lib/utils/storage';
+import { createStorage } from '$lib/utils/storage-api';
 import { checkPendingMigrations, migrateUserConfig } from './migrateUserConfig';
 
 const STORAGE_KEY = 'userConfig';
-const storage = getStorageAPI<UserConfig>(STORAGE_KEY);
+const storage = createStorage(STORAGE_KEY);
 
 // Internal config object is a global variable, defaultConfig is only a fallback
 export const config: UserConfig = structuredClone(defaultConfig);
@@ -25,35 +25,44 @@ export function subscribe(callback: Subscriber) {
 	return () => subscribers.delete(callback);
 }
 
-await storage.get(STORAGE_KEY).then((stored) => {
-	if (stored) {
-		// If stored version is different, then migrate
-		if (checkPendingMigrations(stored)) {
-			const migrated = migrateUserConfig(stored);
-			Object.assign(config, migrated);
-			storage.set(STORAGE_KEY, migrated);
-			notifySubscribers();
-		} else {
-			Object.assign(config, stored);
-			notifySubscribers();
-		}
-	}
-});
+/* ---------------- Initial load ---------------- */
 
-// Save config on demand
-export function saveConfig(newConfig: UserConfig) {
-	Object.assign(config, newConfig);
-	storage.set(STORAGE_KEY, newConfig);
+const stored = await storage.get();
+
+if (stored && typeof stored === 'object') {
+	const storedConfig = stored as UserConfig;
+
+	if (checkPendingMigrations(storedConfig)) {
+		const migrated = migrateUserConfig(storedConfig);
+		Object.assign(config, migrated);
+		await storage.set(migrated);
+	} else {
+		Object.assign(config, storedConfig);
+	}
+
 	notifySubscribers();
 }
 
-// Listen to external changes
-storage.onChanged?.((newVal) => {
-	if (!newVal) return;
-	Object.assign(config, newVal);
+/* ---------------- Save config ---------------- */
+
+export function saveConfig(newConfig: UserConfig) {
+	Object.assign(config, newConfig);
+	storage.set(newConfig);
+	notifySubscribers();
+}
+
+/* ---------------- External changes ---------------- */
+
+const unsubscribeStorage = storage.onChanged((newVal) => {
+	if (!newVal || typeof newVal !== 'object') return;
+
+	Object.assign(config, newVal as UserConfig);
 	notifySubscribers();
 });
 
+/* ---------------- Cleanup ---------------- */
+
 export function destroy() {
+	unsubscribeStorage();
 	subscribers.clear();
 }
