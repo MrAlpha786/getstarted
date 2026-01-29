@@ -3,12 +3,12 @@
 	import Sun from '@lucide/svelte/icons/sun';
 	import Moon from '@lucide/svelte/icons/moon';
 	import * as ToggleGroup from '$lib/components/ui/toggle-group/index.js';
-	import { getThemeSetting, setTheme } from '$lib/utils/theme';
-	import type { ThemeSetting } from '$lib/types/user-config';
+	import { setTheme, themeState } from '$lib/utils/theme';
+	import type { Theme } from '$lib/states/theme.svelte';
 
-	let themesetting: ThemeSetting = $state(getThemeSetting());
+	let themesetting: Theme = $state(themeState.theme);
 	// svelte-ignore state_referenced_locally
-	let previous: ThemeSetting = themesetting;
+	let previous: Theme = themesetting;
 
 	$effect(() => {
 		// toggling again same button set its value to empty string

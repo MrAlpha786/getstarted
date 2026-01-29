@@ -1,11 +1,9 @@
+import type { Theme } from '$lib/states/theme.svelte';
 export interface Bookmark {
 	id: number;
 	label: string;
 	url: string;
 }
-
-export type Theme = 'light' | 'dark';
-export type ThemeSetting = Theme | 'system';
 
 export interface SearchEngine {
 	id: string;
@@ -25,7 +23,7 @@ export interface UserConfig {
 	userName: string;
 	searchEngine: string;
 	customEngines?: SearchEngine[];
-	theme: ThemeSetting;
+	theme: Theme;
 	cards: Card[];
 }
 

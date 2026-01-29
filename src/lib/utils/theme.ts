@@ -1,68 +1,42 @@
-import type { Theme, ThemeSetting } from '$lib/types/user-config';
+import { ThemeState, type Theme } from '$lib/states/theme.svelte';
 import { getStorageAPI } from '$lib/utils/storage';
 
 const STORAGE_KEY = 'userTheme';
-const storage = getStorageAPI<ThemeSetting>(STORAGE_KEY);
+const storage = getStorageAPI<Theme>(STORAGE_KEY);
 
-let currentSetting: ThemeSetting = 'system';
-let mediaQuery: MediaQueryList | null = null;
-
-function resolveTheme(): Theme {
-	return currentSetting === 'system'
-		? window.matchMedia('(prefers-color-scheme: dark)').matches
-			? 'dark'
-			: 'light'
-		: currentSetting;
-}
-
-function applyTheme(theme: Theme) {
-	document.documentElement.dataset.theme = theme;
-}
-
-function updateSystemListener(enable: boolean) {
-	if (enable && !mediaQuery) {
-		mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		mediaQuery.addEventListener('change', onSystemThemeChange);
-	} else if (!enable && mediaQuery) {
-		mediaQuery.removeEventListener('change', onSystemThemeChange);
-		mediaQuery = null;
-	}
-}
-
-function onSystemThemeChange() {
-	if (currentSetting === 'system') {
-		applyTheme(resolveTheme());
-	}
-}
-
-export function setTheme(setting: ThemeSetting) {
-	if (setting === currentSetting) return;
-
-	currentSetting = setting;
-	storage.set(STORAGE_KEY, setting);
-	applyTheme(resolveTheme());
-	updateSystemListener(setting === 'system');
-}
+export const themeState = new ThemeState();
 
 export function toggleTheme() {
-	const currentTheme = resolveTheme();
-	const newTheme: Theme = currentTheme === 'light' ? 'dark' : 'light';
-	setTheme(newTheme);
+	let isDark: boolean;
+	if (themeState.theme === 'system') {
+		isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+	}
+	else {
+		isDark = themeState.theme === 'dark';
+	}
+	const theme = isDark ? 'light' : 'dark';
+	setTheme(theme);
 }
 
-export function getThemeSetting(): ThemeSetting {
-	return currentSetting;
+export function setTheme(theme: Theme) {
+	if (theme === themeState.theme) return;
+	
+	themeState.theme = theme;
+	themeState.apply();
+	storage.set(STORAGE_KEY, theme);
 }
 
 // Initial load
 storage.get(STORAGE_KEY).then((stored) => {
-	if (stored) currentSetting = stored;
-	applyTheme(resolveTheme());
-	updateSystemListener(currentSetting === 'system');
+	if (stored) {
+		themeState.theme = stored;
+		themeState.apply();
+	}
 });
 
 // Sync from external changes (e.g. another tab or extension)
-storage.onChanged((newValue: ThemeSetting | null) => {
-	if (!newValue || newValue === currentSetting) return;
-	setTheme(newValue);
+storage.onChanged((newValue: Theme | null) => {
+	if (!newValue || newValue === themeState.theme) return;
+	themeState.theme = newValue;
+	themeState.apply();
 });
