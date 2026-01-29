@@ -18,12 +18,13 @@ export interface Card {
 }
 
 export interface UserConfig {
-	version: string;
-	migrationId: number;
+	version?: string;
+	migrationId?: number;
+	schemaVersion?: number;
 	userName: string;
 	searchEngine: string;
 	customEngines?: SearchEngine[];
-	theme: Theme;
+	theme?: Theme;
 	cards: Card[];
 }
 
