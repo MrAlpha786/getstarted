@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Card } from '$lib/types/user-config';
+	import type { Card } from '$lib/config';
 	const { cards }: { cards: Card[] } = $props();
 
 	let activeTab = $state(0);

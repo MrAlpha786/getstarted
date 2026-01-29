@@ -1,6 +1,6 @@
 // src/lib/utils/importUserConfig.ts
-import { hasPendingMigrations, migrateUserConfig } from '$lib/config/migrations/runner';
-import type { UserConfig } from '$lib/types/user-config';
+import { hasPendingMigrations, migrateUserConfig } from '$lib/config/migrations';
+import type { UserConfig } from '$lib/config';
 
 /**
  * Attempts to migrate or validate an imported config. Returns an object with:

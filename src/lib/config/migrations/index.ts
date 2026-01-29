@@ -1,4 +1,4 @@
-import type { UserConfig } from '$lib/types/user-config';
+import type { UserConfig } from '$lib/config';
 export { hasPendingMigrations, migrateUserConfig } from './runner';
 
 export interface Migration {

@@ -1,4 +1,4 @@
-import type { SearchEngine } from '$lib/types/user-config';
+import type { SearchEngine } from '$lib/config';
 
 export const supportedEngines = [
 	{

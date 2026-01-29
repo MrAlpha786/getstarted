@@ -1,4 +1,4 @@
-import type { UserConfigErrors } from '$lib/types/user-config';
+import type { UserConfigErrors } from '$lib/config';
 
 export function setNestedErrorWithIndexKeys(
 	obj: UserConfigErrors,

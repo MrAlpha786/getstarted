@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { UserConfig, UserConfigErrors } from '$lib/types/user-config';
+	import type { UserConfig, UserConfigErrors } from '$lib/config';
 
 	import SearchEngineConfig from './components/SearchEngineConfig.svelte';
 	import UsernameConfig from './components/UsernameConfig.svelte';

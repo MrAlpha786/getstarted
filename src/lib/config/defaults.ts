@@ -1,4 +1,4 @@
-import type { UserConfig } from '$lib/types/user-config';
+import type { UserConfig } from ".";
 
 const defaultConfig: UserConfig = {
 	version: import.meta.env.APP_VERSION,

@@ -3,7 +3,7 @@
 	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import GripVertical from '@lucide/svelte/icons/grip-vertical';
 	import { Button } from '../components/ui/button/index';
-	import type { Bookmark, BookmarkErrors } from '$lib/types/user-config';
+	import type { Bookmark, BookmarkErrors } from '$lib/config';
 	import { dragHandleZone, dragHandle } from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
 	import type { ClassValue } from 'svelte/elements';

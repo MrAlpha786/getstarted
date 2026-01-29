@@ -1,4 +1,4 @@
-import type { UserConfig } from '$lib/types/user-config';
+import type { UserConfig } from '$lib/config';
 import { v0_to_v1 } from './v0-to-v1';
 import type { Migration } from '.';
 

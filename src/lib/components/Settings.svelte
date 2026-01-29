@@ -7,9 +7,9 @@
 	import { saveConfig } from '$lib/utils/user-config';
 	import ConfirmnDialog from './ConfirmnDialog.svelte';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import type { UserConfig } from '$lib/types/user-config';
+	import type { UserConfig } from '$lib/config';
 	import About from './About.svelte';
-	import { UserConfigSchema } from '$lib/schemas/user-config';
+	import { UserConfigSchema } from '$lib/config/schemas/user-config';
 	import { setNestedErrorWithIndexKeys } from '$lib/forms/user-config/util';
 	import SettingsImportExport from './SettingsImportExport.svelte';
 

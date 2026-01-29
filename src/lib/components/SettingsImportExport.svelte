@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { UserConfig } from '$lib/types/user-config';
+	import type { UserConfig } from '$lib/config';
 	import Button from './ui/button/button.svelte';
 	import Label from './ui/label/label.svelte';
 	import ConfirmnDialog from './ConfirmnDialog.svelte';

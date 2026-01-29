@@ -5,7 +5,7 @@
 	import DragBookmarkList from '$lib/components/DragBookmarkList.svelte';
 	import { Button } from '$lib/components/ui/button/index';
 	import Plus from '@lucide/svelte/icons/plus';
-	import type { Card, CardErrors } from '$lib/types/user-config';
+	import type { Card, CardErrors } from '$lib/config';
 
 	let {
 		cards = $bindable(),
