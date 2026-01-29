@@ -1,5 +1,5 @@
 import type { UserConfig } from '$lib/types/user-config';
-import defaultConfig from '$lib/config/default-config';
+import {defaultConfig} from '$lib/config';
 import { createStorage } from '$lib/utils/storage-api';
 import { hasPendingMigrations, migrateUserConfig } from '$lib/config/migrations';
 
