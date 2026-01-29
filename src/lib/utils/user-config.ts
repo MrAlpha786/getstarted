@@ -1,7 +1,7 @@
 import type { UserConfig } from '$lib/types/user-config';
 import defaultConfig from '$lib/config/default-config';
 import { createStorage } from '$lib/utils/storage-api';
-import { checkPendingMigrations, migrateUserConfig } from './migrateUserConfig';
+import { hasPendingMigrations, migrateUserConfig } from '$lib/config/migrations';
 
 const STORAGE_KEY = 'userConfig';
 const storage = createStorage(STORAGE_KEY);
@@ -30,17 +30,16 @@ export function subscribe(callback: Subscriber) {
 const stored = await storage.get();
 
 if (stored && typeof stored === 'object') {
-	const storedConfig = stored as UserConfig;
+	let storedConfig = stored as UserConfig;
 
-	if (checkPendingMigrations(storedConfig)) {
-		const migrated = migrateUserConfig(storedConfig);
-		Object.assign(config, migrated);
-		await storage.set(migrated);
+	if (hasPendingMigrations(storedConfig)) {
+		storedConfig = migrateUserConfig(storedConfig);
+		saveConfig(storedConfig); // Save migrated config
 	} else {
 		Object.assign(config, storedConfig);
+		notifySubscribers();
 	}
-
-	notifySubscribers();
+		
 }
 
 /* ---------------- Save config ---------------- */
@@ -48,7 +47,6 @@ if (stored && typeof stored === 'object') {
 export function saveConfig(newConfig: UserConfig) {
 	Object.assign(config, newConfig);
 	storage.set(newConfig);
-	notifySubscribers();
 }
 
 /* ---------------- External changes ---------------- */
@@ -57,7 +55,7 @@ const unsubscribeStorage = storage.onChanged((newVal) => {
 	if (!newVal || typeof newVal !== 'object') return;
 
 	Object.assign(config, newVal as UserConfig);
-	notifySubscribers();
+	notifySubscribers(); // Notify subscribers of external changes
 });
 
 /* ---------------- Cleanup ---------------- */

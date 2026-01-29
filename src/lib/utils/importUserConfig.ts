@@ -1,6 +1,6 @@
 // src/lib/utils/importUserConfig.ts
+import { hasPendingMigrations, migrateUserConfig } from '$lib/config/migrations/runner';
 import type { UserConfig } from '$lib/types/user-config';
-import { checkPendingMigrations, migrateUserConfig } from './migrateUserConfig';
 
 /**
  * Attempts to migrate or validate an imported config. Returns an object with:
@@ -47,7 +47,7 @@ export function tryImportUserConfig(
 	}
 	// If we reach here, config is compatible
 	let finalConfig: UserConfig = { ...importedConfig } as UserConfig;
-	if (checkPendingMigrations(importedConfig as UserConfig)) {
+	if (hasPendingMigrations(importedConfig as UserConfig)) {
 		const migrated = migrateUserConfig(importedConfig as UserConfig);
 		if (!migrated) {
 			return {

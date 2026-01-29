@@ -1,16 +1,12 @@
 import { isChrome, isFirefox } from '$lib/utils/browser';
 
-type OnChangeCallback = (
-	newValue: unknown | null,
-	oldValue: unknown | null
-) => void;
+type OnChangeCallback = (newValue: unknown | null, oldValue: unknown | null) => void;
 
 export interface StorageAPI {
 	get(): Promise<unknown | null>;
 	set(value: unknown): Promise<void>;
 	onChanged(callback: OnChangeCallback): () => void;
 }
-
 
 export function createStorage(key: string): StorageAPI {
 	const isExtension = isChrome() || isFirefox();
@@ -41,17 +37,14 @@ export function createStorage(key: string): StorageAPI {
 		});
 	};
 
-	const onExtensionChanged = (callback: OnChangeCallback): () => void => {
+	const onExtensionChanged = (callback: OnChangeCallback): (() => void) => {
 		const listener = (
 			changes: Record<string, { oldValue?: unknown; newValue?: unknown }>,
 			areaName: string
 		) => {
 			if (areaName !== 'sync' || !changes[key]) return;
 
-			callback(
-				changes[key].newValue ?? null,
-				changes[key].oldValue ?? null
-			);
+			callback(changes[key].newValue ?? null, changes[key].oldValue ?? null);
 		};
 
 		const storage = isFirefox() ? browser.storage : chrome.storage;
@@ -71,7 +64,7 @@ export function createStorage(key: string): StorageAPI {
 		localStorage.setItem(key, JSON.stringify(value));
 	};
 
-	const onLocalChanged = (callback: OnChangeCallback): () => void => {
+	const onLocalChanged = (callback: OnChangeCallback): (() => void) => {
 		const handler = (e: StorageEvent) => {
 			if (e.key !== key) return;
 
