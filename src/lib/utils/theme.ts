@@ -1,15 +1,20 @@
-import { ThemeState, type Theme } from '$lib/states/theme.svelte';
-import { getStorageAPI } from '$lib/utils/storage';
-
-const STORAGE_KEY = 'userTheme';
-const storage = getStorageAPI<Theme>(STORAGE_KEY);
+import { ThemeState, type Theme } from '$lib/states/theme';
+import { config, saveConfig, subscribe } from '$lib/utils/user-config';
 
 export const themeState = new ThemeState();
+
+subscribe((cfg) => {
+	if (cfg.theme && cfg.theme !== themeState.theme) {
+		themeState.theme = cfg.theme;
+		themeState.apply();
+	}
+});
 
 export function toggleTheme() {
 	themeState.rotate();
 	themeState.apply();
-	storage.set(STORAGE_KEY, themeState.theme);
+	config.theme = themeState.theme;
+	saveConfig(config);
 }
 
 export function setTheme(theme: Theme) {
@@ -17,20 +22,6 @@ export function setTheme(theme: Theme) {
 
 	themeState.theme = theme;
 	themeState.apply();
-	storage.set(STORAGE_KEY, theme);
+	config.theme = theme;
+	saveConfig(config);
 }
-
-// Initial load
-storage.get(STORAGE_KEY).then((stored) => {
-	if (stored) {
-		themeState.theme = stored;
-		themeState.apply();
-	}
-});
-
-// Sync from external changes (e.g. another tab or extension)
-storage.onChanged((newValue: Theme | null) => {
-	if (!newValue || newValue === themeState.theme) return;
-	themeState.theme = newValue;
-	themeState.apply();
-});

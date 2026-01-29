@@ -30,7 +30,9 @@ await storage.get(STORAGE_KEY).then((stored) => {
 		// If stored version is different, then migrate
 		if (checkPendingMigrations(stored)) {
 			const migrated = migrateUserConfig(stored);
-			saveConfig(migrated);
+			Object.assign(config, migrated);
+			storage.set(STORAGE_KEY, migrated);
+			notifySubscribers();
 		} else {
 			Object.assign(config, stored);
 			notifySubscribers();
@@ -51,3 +53,7 @@ storage.onChanged?.((newVal) => {
 	Object.assign(config, newVal);
 	notifySubscribers();
 });
+
+export function destroy() {
+	subscribers.clear();
+}

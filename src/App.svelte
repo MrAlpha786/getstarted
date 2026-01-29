@@ -2,18 +2,18 @@
 	import Tabs from '$lib/components/Tabs.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import { getSearchEngineById } from '$lib/constants/search-engines';
-	import { config as currentConfig, subscribe } from '$lib/utils/user-config';
+	import { config as currentConfig, subscribe, destroy } from '$lib/utils/user-config';
 	import { toggleTheme } from '$lib/utils/theme';
 	import Settings from '$lib/components/Settings.svelte';
 	import { onDestroy } from 'svelte';
 
 	let config = $state(currentConfig);
 
-	const unsubscribe = subscribe((cfg) => {
+	subscribe((cfg) => {
 		config = cfg;
 	});
 
-	onDestroy(() => unsubscribe());
+	onDestroy(() => destroy());
 </script>
 
 <svelte:head>

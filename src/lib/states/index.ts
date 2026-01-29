@@ -1,5 +1,5 @@
-export type { Theme } from './theme.svelte';
-export { Themes } from './theme.svelte';
-import { ThemeState } from './theme.svelte';
+export type { Theme } from './theme';
+export { Themes } from './theme';
+import { ThemeState } from './theme';
 
 export const themeState = new ThemeState();

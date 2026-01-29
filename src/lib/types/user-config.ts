@@ -1,4 +1,4 @@
-import type { Theme } from '$lib/states/theme.svelte';
+import type { Theme } from '$lib/states/theme';
 export interface Bookmark {
 	id: number;
 	label: string;
