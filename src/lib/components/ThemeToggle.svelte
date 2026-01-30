@@ -10,10 +10,10 @@
 	let previous: Theme = themeState.theme;
 
 	$effect(() => {
-	if (current !== previous) {
-		previous = current;
-		setTheme(current);
-	}
+		if (current !== previous) {
+			previous = current;
+			setTheme(current);
+		}
 	});
 </script>
 
