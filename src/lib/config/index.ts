@@ -1,7 +1,8 @@
 import defaultConfig from './defaults';
-import type { Theme } from '$lib/states/theme';
 
-export {defaultConfig};
+export type { UserConfig } from './schemas';
+
+export { defaultConfig };
 
 export interface Bookmark {
 	id: number;
@@ -19,17 +20,6 @@ export interface Card {
 	id: number;
 	name: string;
 	bookmarks: Bookmark[];
-}
-
-export interface UserConfig {
-	version?: string;
-	migrationId?: number;
-	schemaVersion?: number;
-	userName: string;
-	searchEngine: string;
-	customEngines?: SearchEngine[];
-	theme?: Theme;
-	cards: Card[];
 }
 
 export type BookmarkErrors = {

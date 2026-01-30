@@ -9,7 +9,7 @@
 	import * as Tabs from '$lib/components/ui/tabs';
 	import type { UserConfig } from '$lib/config';
 	import About from './About.svelte';
-	import { UserConfigSchema } from '$lib/config/schemas/user-config';
+	import { UserConfigSchema } from '$lib/config/schemas';
 	import { setNestedErrorWithIndexKeys } from '$lib/forms/user-config/util';
 	import SettingsImportExport from './SettingsImportExport.svelte';
 

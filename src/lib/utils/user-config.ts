@@ -1,5 +1,5 @@
 import type { UserConfig } from '$lib/config';
-import {defaultConfig} from '$lib/config';
+import { defaultConfig } from '$lib/config';
 import { createStorage } from '$lib/utils/storage-api';
 import { hasPendingMigrations, migrateUserConfig } from '$lib/config/migrations';
 
@@ -39,7 +39,6 @@ if (stored && typeof stored === 'object') {
 		Object.assign(config, storedConfig);
 		notifySubscribers();
 	}
-		
 }
 
 /* ---------------- Save config ---------------- */
