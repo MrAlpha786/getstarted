@@ -24,7 +24,7 @@ const RawBookmarkSchema = z.object({
 	url: z.url()
 });
 
-const BookmarksSchema = z.array(z.unknown()).transform((items) =>
+const BookmarksSchema = z.array(z.unknown()).min(1).transform((items) =>
 	items
 		.map((item) => {
 			const parsed = RawBookmarkSchema.safeParse(item);
@@ -41,7 +41,7 @@ const BookmarksSchema = z.array(z.unknown()).transform((items) =>
 const CardSchema = z.object({
 	id: z.number().default(generateRecoveredId()),
 	name: z.string().default('New Card'),
-	bookmarks: BookmarksSchema.default([])
+	bookmarks: BookmarksSchema
 });
 
 /* ------------------------------------------------------------------ */
@@ -64,7 +64,7 @@ export const UserConfigSchemaV0 = z.object({
 
 	theme: z.enum(Themes).default(Themes[0]),
 
-	cards: z.array(CardSchema).default([])
+	cards: z.array(CardSchema).min(1)
 });
 
 export type UserConfigTypeV0 = z.infer<typeof UserConfigSchemaV0>;
