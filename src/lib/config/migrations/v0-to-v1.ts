@@ -5,10 +5,8 @@ export const v0_to_v1 = {
 	from: 0,
 	to: 1,
 	migrate(config: UserConfigTypeV0): UserConfigTypeV1 {
-		/* eslint-disable @typescript-eslint/no-unused-vars */
-		const { customEngines: __, migrationId: _, ...rest } = config;
 		return {
-			...rest,
+			...config,
 			schemaVersion: 1
 		};
 	}

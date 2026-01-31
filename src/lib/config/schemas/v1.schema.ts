@@ -1,19 +1,46 @@
 // src/lib/validation/user-config.schema.ts
 import { z } from 'zod/v4';
-import { UserConfigSchemaV0 } from './v0.schema';
+import { Themes } from '$lib/states';
+import { supportedEngines } from '$lib/constants/search-engines';
 
 z.config({ jitless: true });
 
-// This change is small enough to use schema composition methods but
-// always create a new schema to prevent accidental mutations
-export const UserConfigSchemaV1 = z
-	.object({
-		...UserConfigSchemaV0.shape,
-		schemaVersion: z.literal(1)
-	})
-	.omit({
-		migrationId: true,
-		customEngines: true
-	});
+const BookmarkSchema = z.object({
+	id: z.number(),
+	label: z.string(),
+	url: z.url()
+});
+
+/* ------------------------------------------------------------------ */
+/* Cards (salvage rules)                                              */
+/* ------------------------------------------------------------------ */
+
+const CardSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	bookmarks: z.array(BookmarkSchema)
+});
+
+/* ------------------------------------------------------------------ */
+/* User Config v1                                                     */
+/* ------------------------------------------------------------------ */
+
+const supportedEngineIds = supportedEngines.map((e) => e.id);
+
+export const UserConfigSchemaV1 = z.object({
+	userName: z.string().min(1, 'Username is required'),
+	schemaVersion: z.literal(1),
+
+	searchEngine: z.union(
+		supportedEngineIds.map((id) => z.literal(id)) as [
+			z.ZodLiteral<string>,
+			...z.ZodLiteral<string>[]
+		]
+	),
+
+	theme: z.enum(Themes),
+
+	cards: z.array(CardSchema)
+});
 
 export type UserConfigTypeV1 = z.infer<typeof UserConfigSchemaV1>;
