@@ -1,7 +1,6 @@
 import type { UserConfig } from '.';
 
 const defaultConfig: UserConfig = {
-	version: import.meta.env.APP_VERSION,
 	schemaVersion: 1,
 	userName: 'Faizan',
 	searchEngine: 'google',
