@@ -31,7 +31,7 @@ export function migrateUserConfig(storedConfig: AnyUserConfigType): UserConfig {
 	return migrated as UserConfig;
 }
 
-export function hasPendingMigrations(config: UserConfig): boolean {
+export function hasPendingMigrations(config: AnyUserConfigType): boolean {
 	const current = getSchemaVersion(config);
 	const latest = migrations[migrations.length - 1]?.to ?? current;
 	return current < latest;
