@@ -45,9 +45,12 @@ function getSchema(version: number): ZodObject<any> {
 /* Public API                                                          */
 /* ------------------------------------------------------------------ */
 
-export function validateUserConfig(input: unknown) {
-	const version = getSchemaVersion(input);
-	const schema = getSchema(version);
+export function validateUserConfig(input: unknown, schemaVersion?: number) {
+	if (schemaVersion === undefined) {
+		schemaVersion = getSchemaVersion(input);
+	}
+
+	const schema = getSchema(schemaVersion);
 
 	const parsed = schema.safeParse(input);
 
@@ -60,6 +63,6 @@ export function validateUserConfig(input: unknown) {
 
 	return {
 		success: true,
-		data: parsed.data as UserConfig
+		data: parsed.data as AnyUserConfigType
 	};
 }
