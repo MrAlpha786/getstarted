@@ -24,15 +24,18 @@ const RawBookmarkSchema = z.object({
 	url: z.url()
 });
 
-const BookmarksSchema = z.array(z.unknown()).min(1).transform((items) =>
-	items
-		.map((item) => {
-			const parsed = RawBookmarkSchema.safeParse(item);
-			if (!parsed.success) return null;
-			return parsed.data;
-		})
-		.filter((b) => b !== null)
-);
+const BookmarksSchema = z
+	.array(z.unknown())
+	.min(1)
+	.transform((items) =>
+		items
+			.map((item) => {
+				const parsed = RawBookmarkSchema.safeParse(item);
+				if (!parsed.success) return null;
+				return parsed.data;
+			})
+			.filter((b) => b !== null)
+	);
 
 /* ------------------------------------------------------------------ */
 /* Cards (salvage rules)                                              */

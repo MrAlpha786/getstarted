@@ -13,12 +13,14 @@ import type { UserConfigTypeV1 } from './v1.schema';
 export type UserConfig = UserConfigTypeV1;
 export type AnyUserConfigType = UserConfigTypeV0 | UserConfigTypeV1;
 export const UserConfigSchema = UserConfigSchemaV1;
+export const LATEST_SCHEMA_VERSION = 1;
+export const BASE_SCHEMA_VERSION = 0;
 
 /* ------------------------------------------------------------------ */
 /* Internal helpers (file-local only)                                  */
 /* ------------------------------------------------------------------ */
 
-function getSchemaVersion(input: unknown): number {
+export function getSchemaVersion(input: unknown): number {
 	if (
 		typeof input === 'object' &&
 		input !== null &&
@@ -45,11 +47,7 @@ function getSchema(version: number): ZodObject<any> {
 /* Public API                                                          */
 /* ------------------------------------------------------------------ */
 
-export function validateUserConfig(input: unknown, schemaVersion?: number) {
-	if (schemaVersion === undefined) {
-		schemaVersion = getSchemaVersion(input);
-	}
-
+export function validateUserConfig(input: unknown, schemaVersion: number) {
 	const schema = getSchema(schemaVersion);
 
 	const parsed = schema.safeParse(input);

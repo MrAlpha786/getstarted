@@ -1,6 +1,7 @@
 import defaultConfig from './defaults';
 
 export type { UserConfig } from './schemas';
+export { getSchemaVersion as getConfigVersion } from './schemas';
 
 export { defaultConfig };
 
