@@ -1,4 +1,8 @@
-import type { SearchEngine } from '$lib/config';
+export interface SearchEngine {
+	id: string;
+	name: string;
+	url: string;
+}
 
 export const supportedEngines = [
 	{

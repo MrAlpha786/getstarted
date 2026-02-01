@@ -1,27 +1,9 @@
 import defaultConfig from './defaults';
 
-export type { UserConfig } from './schemas';
+export type { UserConfig, Card, Bookmark } from './schemas';
 export { getSchemaVersion as getConfigVersion } from './schemas';
 
 export { defaultConfig };
-
-export interface Bookmark {
-	id: number;
-	label: string;
-	url: string;
-}
-
-export interface SearchEngine {
-	id: string;
-	name: string;
-	url: string;
-}
-
-export interface Card {
-	id: number;
-	name: string;
-	bookmarks: Bookmark[];
-}
 
 export type BookmarkErrors = {
 	label?: string;

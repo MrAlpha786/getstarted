@@ -11,6 +11,9 @@ import type { UserConfigTypeV1 } from './v1.schema';
 
 // App code must ONLY use this type
 export type UserConfig = UserConfigTypeV1;
+export type Card = UserConfig['cards'][number];
+export type Bookmark = Card['bookmarks'][number];
+
 export type AnyUserConfigType = UserConfigTypeV0 | UserConfigTypeV1;
 export const UserConfigSchema = UserConfigSchemaV1;
 export const LATEST_SCHEMA_VERSION = 1;

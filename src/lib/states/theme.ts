@@ -1,5 +1,4 @@
-export const Themes = ['system', 'light', 'dark'] as const;
-export type Theme = (typeof Themes)[number];
+import { Themes, type Theme } from "$lib/constants/themes";
 
 export class ThemeState {
 	private activeTheme: Theme;

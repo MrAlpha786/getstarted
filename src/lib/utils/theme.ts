@@ -1,4 +1,5 @@
-import { ThemeState, type Theme } from '$lib/states/theme';
+import type { Theme } from '$lib/constants/themes';
+import { ThemeState } from '$lib/states/theme';
 import { config, saveConfig, subscribe } from '$lib/utils/user-config';
 
 export const themeState = new ThemeState();

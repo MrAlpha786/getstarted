@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SearchEngine } from '$lib/config';
+	import type { SearchEngine } from '$lib/constants/search-engines';
 	import { isFirefox } from '$lib/utils/browser';
 
 	const { searchEngine }: { searchEngine: SearchEngine } = $props();

@@ -1,7 +1,7 @@
 // src/lib/validation/user-config.schema.ts
 import { z } from 'zod/v4';
 import { supportedEngines } from '$lib/constants/search-engines';
-import { Themes } from '$lib/states';
+import { Themes } from '$lib/constants/themes';
 
 z.config({ jitless: true });
 
@@ -53,6 +53,8 @@ const CardSchema = z.object({
 
 const supportedEngineIds = supportedEngines.map((e) => e.id);
 
+const ThemeSchema = z.enum(Themes);
+
 export const UserConfigSchemaV0 = z.object({
 	userName: z.string().min(1, 'Username is required').default('User'),
 
@@ -65,7 +67,7 @@ export const UserConfigSchemaV0 = z.object({
 		)
 		.default(supportedEngineIds[0]),
 
-	theme: z.enum(Themes).default(Themes[0]),
+	theme: ThemeSchema.default(Themes[0]),
 
 	cards: z.array(CardSchema).min(1)
 });

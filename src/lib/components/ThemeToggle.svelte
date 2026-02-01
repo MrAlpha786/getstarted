@@ -4,7 +4,7 @@
 	import Moon from '@lucide/svelte/icons/moon';
 	import * as ToggleGroup from '$lib/components/ui/toggle-group/index.js';
 	import { setTheme, themeState } from '$lib/utils/theme';
-	import type { Theme } from '$lib/states/theme';
+	import type { Theme } from '$lib/constants/themes';
 
 	let current: Theme = $state(themeState.theme);
 	let previous: Theme = themeState.theme;
