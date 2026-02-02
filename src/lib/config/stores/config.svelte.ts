@@ -8,7 +8,7 @@ import {
 } from '../schemas';
 import { migrateUserConfig } from '../migrations';
 
-export class ConfigStateStore {
+export class ConfigStore {
 	#config: UserConfig = $state<UserConfig>(this.default());
 	private unsubscribeStorage;
 

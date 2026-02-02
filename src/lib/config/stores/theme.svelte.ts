@@ -1,9 +1,9 @@
 import { Themes, type Theme } from '$lib/constants/themes';
-import type { ConfigStateStore } from './config.svelte';
+import type { ConfigStore } from './config.svelte';
 
-export class ThemeStateStore {
+export class ThemeStore {
 	private themeState: { value: Theme };
-	constructor(config: ConfigStateStore) {
+	constructor(config: ConfigStore) {
 		this.themeState = config.createState('theme');
 		$effect.root(() => {
 			$effect(() => {
