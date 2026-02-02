@@ -3,21 +3,20 @@
 	import Sun from '@lucide/svelte/icons/sun';
 	import Moon from '@lucide/svelte/icons/moon';
 	import * as ToggleGroup from '$lib/components/ui/toggle-group/index.js';
-	import { setTheme, themeState } from '$lib/utils/theme';
 	import type { Theme } from '$lib/constants/themes';
+	import { themeStore } from '$lib/config/stores/index.svelte';
 
-	let current: Theme = $state(themeState.theme);
-	let previous: Theme = themeState.theme;
+	let previous: Theme = themeStore.theme;
 
 	$effect(() => {
-		if (current !== previous) {
-			previous = current;
-			setTheme(current);
+		if (themeStore.theme !== previous) {
+			previous = themeStore.theme;
+			themeStore.theme = themeStore.theme;
 		}
 	});
 </script>
 
-<ToggleGroup.Root bind:value={current} variant="outline" type="single" class="w-full">
+<ToggleGroup.Root bind:value={themeStore.theme} variant="outline" type="single" class="w-full">
 	<ToggleGroup.Item value="system" aria-label="Select System Theme">
 		<AppWindowMac class="size-4" /><span>System</span>
 	</ToggleGroup.Item>

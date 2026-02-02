@@ -4,7 +4,6 @@
 	import * as Sheet from './ui/sheet';
 	import ThemeToggle from './ThemeToggle.svelte';
 	import Label from './ui/label/label.svelte';
-	import { saveConfig } from '$lib/utils/user-config';
 	import ConfirmnDialog from './ConfirmnDialog.svelte';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import type { UserConfig } from '$lib/config';
@@ -12,17 +11,18 @@
 	import { UserConfigSchema } from '$lib/config/schemas';
 	import { setNestedErrorWithIndexKeys } from '$lib/forms/user-config/util';
 	import SettingsImportExport from './SettingsImportExport.svelte';
+	import { configStore } from '$lib/config/stores/index.svelte';
+	import { config } from 'zod';
 
-	let { config = $bindable() }: { config: UserConfig } = $props();
 	let errors = $state({});
 	let save = $state(false);
 	let sheetOpen = $state(false);
 	let confirmDialogOpen = $state(false);
-	let currentConfig = $state.snapshot(config);
+	let currentConfig = $state.snapshot(configStore.config);
 
 	$effect(() => {
 		if (save) {
-			saveAndUpdateConfig(config);
+			saveAndUpdateConfig(configStore.config);
 			sheetOpen = false;
 		}
 		save = false;
@@ -30,9 +30,9 @@
 
 	function saveAndUpdateConfig(configToSave: UserConfig) {
 		if (JSON.stringify($state.snapshot(configToSave)) !== JSON.stringify(currentConfig)) {
-			config = configToSave;
-			saveConfig($state.snapshot(config));
-			currentConfig = $state.snapshot(config);
+			configStore.config = configToSave;
+			configStore.persist();
+			currentConfig = $state.snapshot(configStore.config);
 		}
 	}
 
@@ -40,7 +40,7 @@
 		e.preventDefault();
 		errors = {};
 
-		const result = UserConfigSchema.safeParse(config);
+		const result = UserConfigSchema.safeParse(configStore.config);
 		if (!result.success) {
 			for (const issue of result.error.issues) {
 				setNestedErrorWithIndexKeys(errors, issue.path as (string | number)[], issue.message);
@@ -55,7 +55,10 @@
 <Sheet.Root
 	bind:open={sheetOpen}
 	onOpenChange={(newVal) => {
-		if (!newVal && JSON.stringify($state.snapshot(config)) !== JSON.stringify(currentConfig)) {
+		if (
+			!newVal &&
+			JSON.stringify($state.snapshot(configStore.config)) !== JSON.stringify(currentConfig)
+		) {
 			// Trigger confirm dialog instead of closing
 			confirmDialogOpen = true;
 			sheetOpen = true;
@@ -88,13 +91,18 @@
 
 				<div class="grid gap-2 px-4">
 					<SettingsImportExport
-						{config}
+						config={configStore.config}
 						onImport={(importedConfig) => saveAndUpdateConfig(importedConfig)}
 					/>
 					<Label>{#snippet child({ props })}<span {...props}>Theme</span>{/snippet}</Label>
 					<ThemeToggle />
 				</div>
-				<UserConfigForm bind:errors bind:save bind:config onSubmitCallback={handleSubmitCallback} />
+				<UserConfigForm
+					bind:errors
+					bind:save
+					bind:config={configStore.config}
+					onSubmitCallback={handleSubmitCallback}
+				/>
 			</Tabs.Content>
 			<Tabs.Content value="about">
 				<About />
@@ -111,13 +119,13 @@
 	cancelText="Discard"
 	onConfirm={(e) => {
 		if (handleSubmitCallback(e)) {
-			saveConfig($state.snapshot(config));
+			configStore.persist();
 			sheetOpen = false;
 			confirmDialogOpen = false;
 		} else confirmDialogOpen = false;
 	}}
 	onCancel={() => {
-		config = currentConfig;
+		configStore.config = currentConfig;
 		errors = {};
 		confirmDialogOpen = false;
 		sheetOpen = false;

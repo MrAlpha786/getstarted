@@ -2,18 +2,11 @@
 	import Tabs from '$lib/components/Tabs.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import { getSearchEngineById } from '$lib/constants/search-engines';
-	import { config as currentConfig, subscribe, destroy } from '$lib/utils/user-config';
-	import { toggleTheme } from '$lib/utils/theme';
 	import Settings from '$lib/components/Settings.svelte';
 	import { onDestroy } from 'svelte';
+	import { configStore, themeStore } from '$lib/config/stores/index.svelte';
 
-	let config = $state(currentConfig);
-
-	subscribe((cfg) => {
-		config = cfg;
-	});
-
-	onDestroy(() => destroy());
+	onDestroy(() => configStore.destroy());
 </script>
 
 <svelte:head>
@@ -30,15 +23,15 @@
 			Hi,
 			<button
 				class="text-base-100 bg-base-content cursor-pointer rounded-full px-4"
-				onclick={toggleTheme}
-				aria-label="Theme Toggle">{config.userName}</button
+				onclick={() => themeStore.rotate()}
+				aria-label="Theme Toggle">{configStore.config.userName}</button
 			>
 		</h1>
 
-		<Search searchEngine={getSearchEngineById(config.searchEngine)} />
+		<Search searchEngine={getSearchEngineById(configStore.config.searchEngine)} />
 
-		<Tabs cards={config.cards} />
+		<Tabs cards={configStore.config.cards} />
 		<!-- <button id="openSettingsBtn" class="btn btn-outline">⚙️ Settings</button> -->
-		<Settings bind:config />
+		<Settings />
 	</div>
 </section>

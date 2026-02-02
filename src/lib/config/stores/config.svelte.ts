@@ -1,77 +1,73 @@
-import { onDestroy } from 'svelte';
-import { defaultConfig, getConfigVersion, type UserConfig } from '.';
+import { defaultConfig, getConfigVersion, type UserConfig } from '..';
 import type { StorageAPI } from '$lib/utils/storage-api';
 import {
 	BASE_SCHEMA_VERSION,
 	LATEST_SCHEMA_VERSION,
 	validateUserConfig,
 	type AnyUserConfigType
-} from './schemas';
-import { migrateUserConfig } from './migrations';
+} from '../schemas';
+import { migrateUserConfig } from '../migrations';
 
-type Subscriber = (config: UserConfig | null) => void;
-
-export class ConfigStore {
-	private config: UserConfig = structuredClone(defaultConfig);
-	private subscribers = new Set<Subscriber>();
+export class ConfigStateStore {
+	#config: UserConfig = $state<UserConfig>(this.default());
+	private unsubscribeStorage;
 
 	constructor(private storage: StorageAPI) {
-		this.init();
+		this.initConfig();
 
-		const unsubscribeStorage = this.storage.onChanged((newVal) => {
-			if (!newVal || typeof newVal !== 'object') {
-				this.notify(null);
-				return;
-			}
+		this.unsubscribeStorage = storage.onChanged((newVal) => {
+			if (!newVal || typeof newVal !== 'object') return;
 
 			const validated = this.validate(newVal);
 			if (validated) {
-				Object.assign(this.config, validated);
-				this.notify(this.config);
+				this.#config = validated;
 				return;
 			}
-			this.notify(null);
-		});
-
-		onDestroy(() => {
-			unsubscribeStorage();
-			this.subscribers.clear();
 		});
 	}
 
-	private async init() {
+	destroy() {
+		this.unsubscribeStorage();
+	}
+
+	private async initConfig(): Promise<void> {
 		const raw = await this.storage.get();
+
 		if (!raw || typeof raw !== 'object') {
-			this.notify(null);
 			return;
 		}
 
 		const validated = this.validate(raw);
 		if (validated) {
-			Object.assign(this.config, validated);
-			this.notify(this.config);
+			this.#config = validated;
 			return;
 		}
-		this.notify(null);
 	}
 
-	subscribe(cb: Subscriber): () => void {
-		this.subscribers.add(cb);
-		cb(this.config);
-		return () => this.subscribers.delete(cb);
+	get config() {
+		return this.#config;
 	}
 
-	get(): UserConfig {
-		return this.config;
+	set config(v: UserConfig) {
+		this.#config = v;
 	}
 
-	set(config: UserConfig) {
-		Object.assign(this.config, config);
-		this.notify(this.config);
+	persist() {
+		this.storage.set(this.#config);
 	}
 
-	private notify(config: UserConfig | null) {
-		for (const cb of this.subscribers) cb(config);
+	createState<K extends keyof UserConfig>(key: K) {
+		const store = this;
+
+		return {
+			get value(): UserConfig[K] {
+				return store.#config[key];
+			},
+			set value(v: UserConfig[K]) {
+				store.#config[key] = v;
+				store.storage.set(store.#config);
+			}
+		};
 	}
 
 	recover(raw: object): UserConfig | null {
