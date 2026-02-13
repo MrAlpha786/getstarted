@@ -6,7 +6,6 @@
 	"image": "mcr.microsoft.com/devcontainers/typescript-node",
 
 	"mounts": [
-		"source=${env:HOME}/.ssh, target=/root/.ssh,type=bind,consistency=cached",
 		"source=${env:HOME}/.gitconfig, target=/root/.gitconfig,type=bind,consistency=cached"
 	]
 
