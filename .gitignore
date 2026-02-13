@@ -23,3 +23,6 @@ artifacts
 *.njsproj
 *.sln
 *.sw?
+
+# Devcontainer
+.pnpm-store
