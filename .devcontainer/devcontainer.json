@@ -3,7 +3,11 @@
 {
 	"name": "Node.js & TypeScript",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node"
+	"image": "mcr.microsoft.com/devcontainers/typescript-node",
+
+	"mounts": [
+		"source=pnpm-vol,target=/home/node/.local/share/pnpm,type=volume"
+	],
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -12,6 +16,7 @@
 	// "forwardPorts": [5173],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "pnpm config set -g store-dir ~/.local/share/pnpm/store"
 	// "postCreateCommand": "pnpm install; pnpm dev --host 127.0.0.1"
 
 	// Configure tool-specific properties.
