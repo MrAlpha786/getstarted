@@ -5,9 +5,7 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/typescript-node",
 
-	"mounts": [
-		"source=pnpm-vol,target=/home/node/.local/share/pnpm,type=volume"
-	],
+	"mounts": ["source=pnpm-vol,target=/home/node/.local/share/pnpm,type=volume"],
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
