@@ -7,3 +7,7 @@ const configStorage = createStorage(STORAGE_KEY);
 
 export const configStore = new ConfigStore(configStorage);
 export const themeStore = new ThemeStore(configStore);
+
+export async function initStores(): Promise<void> {
+	await configStore.init();
+}

@@ -3,8 +3,8 @@ import type { ConfigStore } from './config.svelte';
 
 export class ThemeStore {
 	private themeState: { value: Theme };
-	constructor(config: ConfigStore) {
-		this.themeState = config.createState('theme');
+	constructor(private config: ConfigStore) {
+		this.themeState = this.config.createState('theme');
 		$effect.root(() => {
 			$effect(() => {
 				this.apply();
@@ -18,6 +18,7 @@ export class ThemeStore {
 
 	set theme(value: Theme) {
 		this.themeState.value = value;
+		this.config.persist();
 	}
 
 	apply() {

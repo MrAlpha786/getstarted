@@ -3,9 +3,14 @@
 	import Search from '$lib/components/Search.svelte';
 	import { getSearchEngineById } from '$lib/constants/search-engines';
 	import Settings from '$lib/components/Settings.svelte';
-	import { onDestroy } from 'svelte';
-	import { configStore, themeStore } from '$lib/config/stores/index.svelte';
+	import ConfirmnDialog from '$lib/components/ConfirmnDialog.svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { configStore, themeStore, initStores } from '$lib/config/stores/index.svelte';
 
+	let corruptDialogOpen = $derived(configStore.status.value === 'invalid');
+	let recoveryFailed = $state(false);
+
+	onMount(() => initStores());
 	onDestroy(() => configStore.destroy());
 </script>
 
@@ -17,21 +22,40 @@
 	/>
 </svelte:head>
 
-<section>
-	<div id="container" class="mx-auto flex h-full w-[90%] max-w-200 flex-col pt-[20vh]">
-		<h1 class="mb-4 text-center text-4xl font-bold">
-			Hi,
-			<button
-				class="text-base-100 bg-base-content cursor-pointer rounded-full px-4"
-				onclick={() => themeStore.rotate()}
-				aria-label="Theme Toggle">{configStore.config.userName}</button
-			>
-		</h1>
+<ConfirmnDialog
+	bind:open={corruptDialogOpen}
+	title="Corrupt Config Detected"
+	description={recoveryFailed
+		? 'Recovery failed. Continuing with your last known good config.'
+		: 'Your config appears to be corrupted. You can try to recover it or continue with your last known good config.'}
+	confirmText={recoveryFailed ? 'OK' : 'Try to Recover'}
+	cancelText="Cancel"
+	onConfirm={() => {
+		if (recoveryFailed || !configStore.attemptRecovery()) {
+			recoveryFailed = false;
+			configStore.markValid();
+		} else {
+			recoveryFailed = true;
+		}
+	}}
+	onCancel={() => configStore.markValid()}
+/>
 
-		<Search searchEngine={getSearchEngineById(configStore.config.searchEngine)} />
+{#if configStore.status.value !== 'pending'}
+	<section>
+		<div id="container" class="mx-auto flex h-full w-[90%] max-w-200 flex-col pt-[20vh]">
+			<h1 class="mb-4 text-center text-4xl font-bold">
+				Hi,
+				<button
+					class="text-base-100 bg-base-content cursor-pointer rounded-full px-4"
+					onclick={() => themeStore.rotate()}
+					aria-label="Theme Toggle">{configStore.config.userName}</button
+				>
+			</h1>
 
-		<Tabs cards={configStore.config.cards} />
-		<!-- <button id="openSettingsBtn" class="btn btn-outline">⚙️ Settings</button> -->
-		<Settings />
-	</div>
-</section>
+			<Search searchEngine={getSearchEngineById(configStore.config.searchEngine)} />
+			<Tabs cards={configStore.config.cards} />
+			<Settings />
+		</div>
+	</section>
+{/if}
