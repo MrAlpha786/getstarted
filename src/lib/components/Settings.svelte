@@ -12,7 +12,6 @@
 	import { setNestedErrorWithIndexKeys } from '$lib/forms/user-config/util';
 	import SettingsImportExport from './SettingsImportExport.svelte';
 	import { configStore } from '$lib/config/stores/index.svelte';
-	import { config } from 'zod';
 
 	let errors = $state({});
 	let save = $state(false);
@@ -91,7 +90,6 @@
 
 				<div class="grid gap-2 px-4">
 					<SettingsImportExport
-						config={configStore.config}
 						onImport={(importedConfig) => saveAndUpdateConfig(importedConfig)}
 					/>
 					<Label>{#snippet child({ props })}<span {...props}>Theme</span>{/snippet}</Label>

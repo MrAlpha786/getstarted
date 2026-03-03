@@ -6,16 +6,16 @@
 	import Plus from '@lucide/svelte/icons/plus';
 	import Download from '@lucide/svelte/icons/download';
 	import { tryImportUserConfig } from '$lib/utils/importUserConfig';
+	import { configStore } from '$lib/config/stores/index.svelte';
 
-	let { config, onImport }: { config: UserConfig; onImport: (config: UserConfig) => void } =
-		$props();
+	let { onImport }: { onImport: (config: UserConfig) => void } = $props();
 
 	const VERSION = import.meta.env.APP_VERSION || 'unknown';
 
 	function exportSettings() {
 		const exportObj = {
 			version: VERSION,
-			config: $state.snapshot(config)
+			config: $state.snapshot(configStore.config)
 		};
 		const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj));
 		const dlAnchorElem = document.createElement('a');
